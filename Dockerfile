@@ -11,9 +11,9 @@ ARG SOURCE_DIR
 WORKDIR "$SOURCE_DIR"
 
 RUN corepack enable
+COPY . .
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
 RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
-COPY . .
 RUN pnpm build && \
   tar czvf release/app.tar.gz -C dist/ .
 
