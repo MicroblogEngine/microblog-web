@@ -28,7 +28,7 @@ pipeline {
         stage('Runtime') {
             steps {
                 script {
-                    sh "docker build -t ${env.BASE_IMAGE}--target runtime ."
+                    sh "docker build -t ${env.BASE_IMAGE} --target runtime ."
                 }
             }
         }
