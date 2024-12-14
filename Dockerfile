@@ -9,14 +9,13 @@ FROM node:${NODE_VERSION}-${DEBIAN_CODENAME} AS builder
 ARG SOURCE_DIR
 
 WORKDIR "$SOURCE_DIR"
+
+RUN corepack enable
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm fetch --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install --frozen-lockfile
 COPY . .
-RUN rm  -rf dist  && \
-  rm -rf release  && \ 
-  mkdir release  && \
-  rm -f yarn.lock  && \
-  yarn install --no-optional && \
-  npm run build:aot:nightly && \
-  tar czvf release/pqd-lolui.tar.gz -C dist/ .
+RUN pnpm build && \
+  tar czvf release/app.tar.gz -C dist/ .
 
 FROM builder AS test
 
@@ -30,16 +29,12 @@ FROM nginx:stable AS runtime
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ARG SOURCE_DIR
-COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/pqd-lolui.tar.gz",  "/pqd-lolui.tar.gz" ]
+COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
 
 RUN mkdir /app
 
-RUN chmod +x /entrypoint.sh && \
-  cp /config/* /etc/nginx && \
-  cp /pqd-lolui.tar.gz /app && \
-  cd /app && \
-  chown -R nginx:nginx * && \
-  tar xzvf pqd-lolui.tar.gz && \
-  rm pqd-lolui.tar.gz
+RUN cp /app.tar.gz /usr/share/nginx && \
+  cd /usr/share/nginx && \
+  tar xzvf app.tar.gz && \
+  rm app.tar.gz
 
-CMD ["/entrypoint.sh"]

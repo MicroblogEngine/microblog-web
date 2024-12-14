@@ -4,6 +4,13 @@ pipeline {
         BASE_IMAGE = "training/microblog-web" 
     }        
     stages {
+        stage('Lint') {
+            steps {
+                script {
+                    sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
