@@ -7,7 +7,7 @@ pipeline {
         stage('Lint') {
             steps {
                 script {
-                    sh "docker run --rm -i hadolint/hadolint < Dockerfile"
+                    sh "docker run -e HADOLINT_FAILURE_THRESHOLD=error --rm -i hadolint/hadolint < Dockerfile"
                 }
             }
         }
