@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
-ARG NODE_VERSION=12.16.1
-ARG DEBIAN_CODENAME=buster
+ARG NODE_VERSION=23.4
+ARG DEBIAN_CODENAME=slim
 
 ARG SOURCE_DIR=/home/jenkins
 
