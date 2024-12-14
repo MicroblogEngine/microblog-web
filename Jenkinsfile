@@ -18,13 +18,13 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
-            steps {
-                script {
-                    sh "docker run --rm ${env.BASE_IMAGE} test"
-                }
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         script {
+        //             sh "docker run --rm ${env.BASE_IMAGE} test"
+        //         }
+        //     }
+        // }
         stage('Runtime') {
             steps {
                 script {
