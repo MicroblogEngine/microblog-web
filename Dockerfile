@@ -36,8 +36,9 @@ COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/ap
 
 RUN mkdir /app
 
-RUN cp /app.tar.gz /usr/share/nginx && \
-  cd /usr/share/nginx && \
+RUN cp /app.tar.gz /usr/share/nginx/html && \
+  cd /usr/share/nginx/html && \
   tar xzvf app.tar.gz && \
-  rm app.tar.gz
+  rm app.tar.gz && \
+  chown -R nginx:nginx .
 
