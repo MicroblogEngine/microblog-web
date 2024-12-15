@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microblog-web-deployment
+  labels:
+    env: sandbox
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: sandbox
+  template:
+    metadata:
+      labels:
+        env: sandbox
+    spec:
+      containers:
+      - name: microblog-web-container
+        image: registry.local:5000/training/microblog-web:latest
+        ports:
+        - containerPort: 80
