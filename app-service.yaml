@@ -1,0 +1,12 @@
+kind: Service
+metadata:
+  name: microblog-web-svc
+  labels:
+    app: microblog-web
+spec:
+  type: NodePort
+  selector:
+    app: microblog-web
+  ports:
+    - port: 3333
+      targetPort: 80

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: microblog-web-pod
+  labels:
+    app: microblog-web
+spec:
+  containers:
+  - name: microblog-web-container
+    image: registry.local:5000/training/microblog-web:latest
+    ports:
+      - containerPort: 80

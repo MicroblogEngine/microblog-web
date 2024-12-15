@@ -41,5 +41,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+            steps {
+                script {
+                    sh "kubectl apply -f app-pod.yaml -n default"
+                    sh "kubectl apply -f app-service.yaml -n default"
+                }
+            }
+        }        
     }
 } 
