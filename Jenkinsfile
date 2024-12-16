@@ -48,6 +48,7 @@ pipeline {
                     sh 'chmod u+x ./kubectl'                      
                     sh "./kubectl apply -f app-service.yaml -n default"
                     sh "./kubectl apply -f app-deployment.yaml -n default"
+                    sh "./kubectl rollout restart deployment/microblog-web-deployment"
                 }
             }
         }        
