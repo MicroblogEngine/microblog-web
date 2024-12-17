@@ -20,7 +20,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "@/helpers/*": [ "./src/helpers/*" ],
+      "@/models/*": [ "./src/models/*" ],
+      "@/states/*": [ "./src/states/*" ]
+    }
   },
   "include": ["src"]
 }

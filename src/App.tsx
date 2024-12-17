@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-import { feedApi } from './helpers/api'
-import { Post } from './models/feed'
+import { Post } from '@/models/feed';
+import { FeedState, useStore } from '@/states/feed'
 
 function App() {
-  const [feed, setFeed] = useState<Post[]>([])
+  //const isLoading = useStore((state: FeedState) => state.isLoading)
+  const feed = useStore((state: FeedState) => state.feed)
+  const loadFeed = useStore((state: FeedState) => state.loadFeed)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const feed = (await feedApi.get<Post[]>('/feed')).data || [];
-      setFeed(feed);
-    }
-    fetchData();
+    loadFeed();
   }, [])
 
   return (
@@ -29,8 +27,8 @@ function App() {
       </div>
       <h1>Microblog</h1>
       <div className="card">
-        {feed.map(person => {
-          return <p>{person.text}</p>
+        {feed?.map((post: Post) => {
+          return <p>{post.text}</p>
         })}
       </div>
     </>
