@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: microblog-web-deployment
   labels:
-    env: sandbox
+    app: microblog-web
 spec:
   replicas: 3
   selector:
     matchLabels:
-      env: sandbox
+      app: microblog-web
   template:
     metadata:
       labels:
-        env: sandbox
+        app: microblog-web
     spec:
       containers:
       - name: microblog-web-container
