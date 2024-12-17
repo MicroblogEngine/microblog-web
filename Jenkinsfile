@@ -15,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "docker build -t ${env.BASE_IMAGE} --target builder ."
+                    sh "docker build -t ${env.BASE_IMAGE} --env-file config.env --target builder ."
                 }
             }
         }
@@ -45,8 +45,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.49.2:8443']){
                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-                    sh 'chmod u+x ./kubectl'                      
-                    sh "./kubectl create -f app-config.yaml"                    
+                    sh 'chmod u+x ./kubectl'                                        
                     sh "./kubectl apply -f app-service.yaml -n default"
                     sh "./kubectl apply -f app-deployment.yaml -n default"
                     sh "./kubectl rollout restart deployment/microblog-web-deployment"
