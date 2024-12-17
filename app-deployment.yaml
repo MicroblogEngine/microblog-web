@@ -17,5 +17,8 @@ spec:
       containers:
       - name: microblog-web-container
         image: registry.local:5000/training/microblog-web:latest
+        envFrom:
+          - configMapRef:
+              name: microblog-web-config
         ports:
         - containerPort: 80
