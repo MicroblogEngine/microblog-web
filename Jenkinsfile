@@ -6,12 +6,13 @@ String appName = 'web'
 //project CI/CD pipeline config
 String dockerRepository = "training/${appFamily}-${appName}"
 String dockerRegistry = "registry.local:5000"
-String infraJob = "training/${appFamily}-${appName}-kube"
+String infraJob = "/Training/training/${appFamily}-${appName}-kube"
+String infraBranch = "main"
 dockerPipeline([
     dockerRepository: dockerRepository,
     dockerRegistry: dockerRegistry,
     platform: "linux/amd64",
     infra: [
-        job: infraJob
+        job: "${infraJob}/${infraBranch}"
     ]
 ])
