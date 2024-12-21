@@ -6,5 +6,5 @@ export const usersApi = create({
 });
 
 export const feedApi = create({
-  baseURL: import.meta.env.VITE_FEED_API_BASE_URL ?? "http://localhost/api",
+  baseURL: "http://localhost/api",
 });
