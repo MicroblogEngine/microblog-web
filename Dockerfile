@@ -33,7 +33,7 @@ SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ARG SOURCE_DIR
 COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
-COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.template", "/etc/nginx/templates"]
+COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates"]
 
 RUN mkdir /app
 
