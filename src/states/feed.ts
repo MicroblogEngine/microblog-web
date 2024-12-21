@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { feedApi } from '@/helpers/api';
+import { api } from '@/helpers/api';
 import { Post } from '@/models/feed';
 
 export interface FeedState {
@@ -19,12 +19,12 @@ export const useStore = create<FeedState>((set) => ({
   isLoading: false,
   loadFeed: async () => {
     set({ isLoading: true });
-    const response = await feedApi.get('/feed');
+    const response = await api.get('/feed');
     set({ isLoading: false, feed: response.data as Post[] });
   },
   loadPost: async (postId?: string) => {
     set({ isLoading: true });
-    const response = await feedApi.get(`/feed/${postId}`);
+    const response = await api.get(`/feed/${postId}`);
     set({ isLoading: false, post: response.data as Post })
   }
 }));
