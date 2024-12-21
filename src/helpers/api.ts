@@ -2,9 +2,9 @@ import {create} from 'apisauce';
 
 // define the api
 export const usersApi = create({
-  baseURL: import.meta.env.VITE_USERS_API_BASE_URL ?? "http://localhost/api",
+  baseURL: "http://apps.local:2020/api",
 });
 
 export const feedApi = create({
-  baseURL: "http://localhost/api",
+  baseURL: "http://apps.local:2020/api",
 });
