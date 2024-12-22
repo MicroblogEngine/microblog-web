@@ -17,6 +17,7 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store pnpm install
 RUN rm  -rf dist  && \
   rm -rf release  && \ 
   mkdir release  && \
+  mv api.env .env && \
   pnpm build && \
   tar czvf release/app.tar.gz -C dist/ .
 
@@ -33,7 +34,7 @@ SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
 
 ARG SOURCE_DIR
 COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
-COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
+#COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
 RUN mkdir /app
 
