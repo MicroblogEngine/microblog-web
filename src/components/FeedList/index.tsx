@@ -7,7 +7,7 @@ const FeedList = () => {
   const feed = useStore((state: FeedState) => state.feed)
 
   return (
-    <div>
+    <div className='flex flex-col'>
       {feed?.map((post: Post) => {
         return <FeedItem post={post} />
       })}

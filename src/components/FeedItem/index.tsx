@@ -9,8 +9,10 @@ interface FeedItemProps {
 const FeedItem = ({post}: FeedItemProps) => {
 
   return (
-    <div className='card-body'>
-      <p>{post.text}</p>
+    <div className='card'>
+      <div className='card-body'>
+        <p>{post.text}</p>
+      </div>
     </div>
   );
 };
