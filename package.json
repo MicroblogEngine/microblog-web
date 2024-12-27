@@ -10,10 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.92.3",
     "apisauce": "^3.1.0",
+    "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "swr": "^2.3.0",
+    "tailwindcss": "^3.4.17",
+    "zod": "^3.24.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "daisyui": "^4.12.22",
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
