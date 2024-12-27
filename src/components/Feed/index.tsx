@@ -7,7 +7,7 @@ const Feed = () => {
   const isLoading = useStore((state: FeedState) => state.isLoading)
 
   return (
-    <div className="grow">
+    <div className="w-3/5">
       {isLoading ? <p>Loading...</p> : <FeedList />}   
     </div>
   );

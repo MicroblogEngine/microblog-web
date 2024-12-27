@@ -14,7 +14,7 @@ function App() {
   }, [])
 
   return (
-    <div className='App flex flex-row w-full prose columns-3'>
+    <div className='App flex flex-row w-full columns-3'>
       <LeftBar />
       <Feed />
       <RightBar />

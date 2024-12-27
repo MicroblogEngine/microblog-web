@@ -3,7 +3,7 @@ import "@/components/LeftBar/LeftBar.css"
 
 const LeftBar = () => {
   return (
-    <div>
+    <div className="prose w-1/5">
       <h1>Microblog</h1>
     </div>
   );
