@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {},
   },
   plugins: [
+    require("@tailwindcss/typography"),
     require('daisyui'),
   ],
 }

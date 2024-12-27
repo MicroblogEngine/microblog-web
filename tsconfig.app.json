@@ -24,7 +24,8 @@
     "paths": {
       "@/helpers/*": [ "./src/helpers/*" ],
       "@/models/*": [ "./src/models/*" ],
-      "@/states/*": [ "./src/states/*" ]
+      "@/states/*": [ "./src/states/*" ],
+      "@/components/*": [ "./src/components/*" ],
     }
   },
   "include": ["src"]

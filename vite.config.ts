@@ -9,6 +9,7 @@ export default defineConfig({
       "@/helpers": path.join(__dirname, "src", "helpers"),
       "@/models": path.join(__dirname, "src", "models"),
       "@/states": path.join(__dirname, "src", "states"),
+      "@/components": path.join(__dirname, "src", "components"),
     },
   },  
   plugins: [react()],
