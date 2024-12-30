@@ -3,7 +3,7 @@ import "@/components/RightBar/RightBar.css"
 
 const RightBar = () => {
   return (
-    <div className="prose w-1/5">
+    <div className="hidden w-1/5 prose sm:flex">
       <h1>More About</h1>
     </div>
   );
