@@ -22,10 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "@/components/*": [ "./src/components/*" ],
       "@/helpers/*": [ "./src/helpers/*" ],
       "@/models/*": [ "./src/models/*" ],
       "@/states/*": [ "./src/states/*" ],
-      "@/components/*": [ "./src/components/*" ],
     }
   },
   "include": ["src"]
