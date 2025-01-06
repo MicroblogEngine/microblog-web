@@ -35,14 +35,14 @@ ARG SOURCE_DIR
 COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
 #COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
-RUN apt-get install gettext-base && \ 
-  cp index.html index.html.template && \
-  envsubst < index.html.template > index.html
+RUN apt-get install gettext-base 
 
 RUN mkdir /app
 
 RUN cp /app.tar.gz /usr/share/nginx/html && \
   cd /usr/share/nginx/html && \
+  cp index.html index.html.template && \
+  envsubst < index.html.template > index.html && \
   tar xzvf app.tar.gz && \
   rm app.tar.gz && \
   chown -R nginx:nginx .
