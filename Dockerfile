@@ -36,8 +36,8 @@ COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/ap
 #COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
 RUN apt-get install gettext-base && \ 
-  cp dist/index.html index.html.template && \
-  envsubst < index.html.template > dist/index.html
+  cp index.html index.html.template && \
+  envsubst < index.html.template > index.html
 
 RUN mkdir /app
 
