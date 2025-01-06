@@ -36,6 +36,9 @@ ARG SOURCE_DIR
 COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/app.tar.gz" ]
 #COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
+RUN cp dist/index.html index.html.template && \
+  envsubst < index.html.template > dist/index.html
+
 RUN mkdir /app
 
 RUN cp /app.tar.gz /usr/share/nginx/html && \
