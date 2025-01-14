@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 
-import { FeedState, useStore } from '@/states/feed'
+import { FeedState, useStore } from './reducers/feed'
 import LeftBar from '@/components/LeftBar'
 import RightBar from '@/components/RightBar'
 import Feed from '@/components/Feed'

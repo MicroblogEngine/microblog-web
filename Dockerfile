@@ -26,7 +26,7 @@ ARG SOURCE_DIR
 
 WORKDIR "$SOURCE_DIR"
 
-RUN npm run test
+RUN pnpm run test
 
 FROM nginx:stable AS runtime
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]

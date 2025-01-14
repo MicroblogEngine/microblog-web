@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create, StateCreator } from 'zustand';
 import { api } from '@/helpers/api';
 import { Post } from '@/models/feed';
 
@@ -11,10 +11,9 @@ export interface FeedState {
   loadPost: (postId?: string) => void
 }
 
-// define the store
-export const useStore = create<FeedState>((set) => ({
+export const feedStoreCreator: StateCreator<FeedState> = (set) => ({
   postId: null,
-  posts: [],
+  feed: [],
   post: undefined,
   isLoading: false,
   loadFeed: async () => {
@@ -27,4 +26,7 @@ export const useStore = create<FeedState>((set) => ({
     const response = await api.get(`/feed/${postId}`);
     set({ isLoading: false, post: response.data as Post })
   }
-}));
+});
+
+// define the store
+export const useFeedStore = create(feedStoreCreator);

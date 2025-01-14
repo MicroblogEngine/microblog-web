@@ -7,11 +7,10 @@ interface FeedItemProps {
 }
 
 const FeedItem = ({post}: FeedItemProps) => {
-
   return (
     <div className='card'>
       <div className='card-body'>
-        <p>{post.text}</p>
+        <p data-testid="post_text">{post.text}</p>
       </div>
     </div>
   );

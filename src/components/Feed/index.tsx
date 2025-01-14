@@ -1,14 +1,14 @@
 import { memo } from "react";
 import FeedList from "@/components/FeedList";
-import { FeedState, useStore } from "@/states/feed";
+import { FeedState, useFeedStore } from "@/reducers/feed";
 import "@/components/Feed/Feed.css"
 
 const Feed = () => {
-  const isLoading = useStore((state: FeedState) => state.isLoading)
+  const {feed, isLoading} = useFeedStore((state: FeedState) => state)
 
   return (
     <div className="w-3/5">
-      {isLoading ? <p>Loading...</p> : <FeedList />}   
+      {isLoading ? <p data-testid="loading">Loading...</p> : <FeedList feed={feed} />}   
     </div>
   );
 };
