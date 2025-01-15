@@ -3,7 +3,7 @@ import { it, expect } from 'vitest';
 import { render, renderHook } from '@testing-library/react';
 
 import Feed from '.';
-import { useFeedStore } from '../../reducers/feed';
+import { useFeedStore } from '@/reducers/feed';
 
 it('should return the initial state', () => {
   const { result } = renderHook(() => useFeedStore());
