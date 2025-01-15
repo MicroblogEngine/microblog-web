@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Post } from '@/models/feed';
-import "@/components/FeedItem/FeedItem.css";
+import "@/features/home/components/FeedItem/FeedItem.css";
 
 interface FeedItemProps {
   post: Post,

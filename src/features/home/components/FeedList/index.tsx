@@ -1,6 +1,6 @@
 import { Post } from '@/models/feed';
-import FeedItem from '@/components/FeedItem';
-import "@/components/FeedList/FeedList.css";
+import FeedItem from '../FeedItem';
+import "@/features/home/components/FeedList/FeedList.css";
 
 type FeedListProps = {
   feed?: Post[]

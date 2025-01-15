@@ -6,7 +6,7 @@ export interface FeedState {
   postId: number | null
   feed?: Post[]
   post?: Post
-  isLoading: boolean
+  loading: boolean
   loadFeed: () => void
   loadPost: (postId?: string) => void
 }
@@ -15,16 +15,16 @@ export const feedStoreCreator: StateCreator<FeedState> = (set) => ({
   postId: null,
   feed: [],
   post: undefined,
-  isLoading: false,
+  loading: false,
   loadFeed: async () => {
-    set({ isLoading: true });
+    set({ loading: true });
     const response = await api.get('/feed');
-    set({ isLoading: false, feed: response.data as Post[] });
+    set({ loading: false, feed: response.data as Post[] });
   },
   loadPost: async (postId?: string) => {
-    set({ isLoading: true });
+    set({ loading: true });
     const response = await api.get(`/feed/${postId}`);
-    set({ isLoading: false, post: response.data as Post })
+    set({ loading: false, post: response.data as Post })
   }
 });
 

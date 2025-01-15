@@ -22,7 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "@/*": [ "./src/*" ],
       "@/components/*": [ "./src/components/*" ],
+      "@/features/*": [ "./src/features/*" ],
       "@/helpers/*": [ "./src/helpers/*" ],
       "@/models/*": [ "./src/models/*" ],
       "@/reducers/*": [ "./src/reducers/*" ],

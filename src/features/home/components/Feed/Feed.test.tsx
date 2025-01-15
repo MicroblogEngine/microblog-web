@@ -12,7 +12,7 @@ it('should return the initial state', () => {
 
 it('check if it is loading', async () => {
   const { result } = renderHook(() => useFeedStore());
-  result.current.isLoading = true;
+  result.current.loading = true;
   const { getByTestId } = render(<Feed />);
   const node = getByTestId('loading');
   expect(node).toHaveTextContent('Loading...');
@@ -20,7 +20,7 @@ it('check if it is loading', async () => {
 
 it('check if it is not loading', async () => {
   const { result } = renderHook(() => useFeedStore());
-  result.current.isLoading = false;
+  result.current.loading = false;
   const { queryByTestId } = render(<Feed />);
   const node = queryByTestId('loading');
   expect(node).toBeNull();
@@ -28,7 +28,7 @@ it('check if it is not loading', async () => {
 
 it('check if it is not loading and has empty feed', async () => {
   const { result } = renderHook(() => useFeedStore());
-  result.current.isLoading = false;
+  result.current.loading = false;
   const { queryByTestId } = render(<Feed />);
   const node = queryByTestId('message');
   expect(node).toHaveTextContent('No posts to show');
