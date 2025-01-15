@@ -13,7 +13,7 @@ const FeedList = (props:FeedListProps) => {
         props.feed?.length == 0 ? 
           <p data-testid="message">No posts to show</p> : 
           props.feed?.map((post: Post) => {
-            return <FeedItem post={post} />
+            return <FeedItem key={post.id} post={post} />
           })
       }
     </div>
