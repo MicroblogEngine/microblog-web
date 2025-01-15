@@ -6,6 +6,7 @@ export interface UserState {
   user?: User
   loading: boolean
   login: (username: string, password: string) => void
+  signup: () => void
 }
 
 export const userStoreCreator: StateCreator<UserState> = (set) => ({
@@ -15,8 +16,13 @@ export const userStoreCreator: StateCreator<UserState> = (set) => ({
     set({ loading: true });
     const response = await api.post(`/users/login`, { username, password });
     set({ loading: false, user: response.data as User })
+  },
+  signup: async () => {
+    set({ loading: true });
+    const response = await api.post(`/users/signup`);
+    set({ loading: false, user: response.data as User })
   }
 });
 
 // define the store
-export const useFeedStore = create(userStoreCreator);
+export const useUserStore = create(userStoreCreator);
