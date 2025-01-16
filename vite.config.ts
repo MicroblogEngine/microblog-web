@@ -17,6 +17,8 @@ export default defineConfig({
       "@/helpers": path.join(__dirname, "src", "helpers"),
       "@/models": path.join(__dirname, "src", "models"),
       "@/reducers": path.join(__dirname, "src", "reducers"),
+      "@/validation": path.join(__dirname, "src", "validation"),
+      "@/types": path.join(__dirname, "src", "types"),
     },
   },  
   plugins: [
