@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { SignupFormSchema } from "@ararog/microblog-validation";
-import { cb, SignupForm } from "@ararog/microblog-types";
+import { SignupForm } from "@ararog/microblog-types";
 
 import { useUserStore } from "@/reducers/user";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton";

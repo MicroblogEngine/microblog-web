@@ -3,8 +3,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 
 import { useUserStore } from "@/reducers/user";
-import {VerificationForm} from '@/types/form';
-import {VerifySchema} from '@/validation/form-validation';
+import {VerificationForm} from '@ararog/microblog-types';
+import {VerifyFormSchema} from '@ararog/microblog-validation';
 import RoundedSubmitButton from "@/components/RoundedSubmitButton";
 import PageTitle from "@/components/PageTitle";
 
@@ -19,7 +19,7 @@ const Verify = () => {
     handleSubmit,
     formState: {errors},
   } = useForm<VerificationForm>({
-    resolver: zodResolver(VerifySchema),
+    resolver: zodResolver(VerifyFormSchema),
     defaultValues: {
       code: '',
     },
