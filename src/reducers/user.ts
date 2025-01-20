@@ -15,23 +15,28 @@ export interface UserState {
   signup: (data: SignupForm, signupSuccess: cb) => void;
 }
 
-export const userStoreCreator: StateCreator<UserState> = (set) => ({
+export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   user: undefined,
   loading: false,
   verifying: false,
   verify: async (data, verifySuccess) => {
     try {
       set({ verifying: true });
-      const response = await api.post<User>("/auth/email/verify", data);
-      if (response.ok) {
-        set({
-          user: response?.data,
-          verifying: false,
-        });
-        verifySuccess();
-      } else {
-        set({ verifying: false });
+      
+      data.userId = get().user!.id;
+      
+      const response = await api.post<VerificationForm>("/auth/email/verify", data);
+      if (!response.ok) {
+        const message = "Invalid code!";
+        set({ verifying: false, message });
+        return;
       }
+
+      set({
+        verifying: false,
+      });
+      verifySuccess();
+
     } catch {
       set({ verifying: false });
     }
@@ -43,6 +48,13 @@ export const userStoreCreator: StateCreator<UserState> = (set) => ({
         username,
         password,
       });
+
+      if (response.status === 401) {
+        const message = "Invalid username or password";
+        set({ loading: false, message });
+        return;
+      }
+
       if (response.ok && response.data) {
         localStorage.setItem("token", response.data.token);
         set({
@@ -50,15 +62,8 @@ export const userStoreCreator: StateCreator<UserState> = (set) => ({
           loading: false,
         });
         loginSuccess();
-      } else {
-        let message = "";
-        if (response.status === 401) {
-          message = "Invalid username or password";
-        }
-        set({ loading: false, message });
       }
-    } catch (error) {
-      console.log(error);
+    } catch {
       set({ loading: false });
     }
   },
@@ -66,15 +71,15 @@ export const userStoreCreator: StateCreator<UserState> = (set) => ({
     try {
       set({ loading: true });
       const response = await api.post<User>("/auth/signup", data);
-      if (response.ok) {
-        set({
-          user: response?.data,
-          loading: false,
-        });
-        signupSuccess();
-      } else {
+      if (!response.ok) {
         set({ loading: false });
+        return;
       }
+      set({
+        user: response?.data,
+        loading: false,
+      });
+      signupSuccess();
     } catch {
       set({ loading: false });
     }

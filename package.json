@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@ararog/microblog-state": "^0.0.1",
-    "@ararog/microblog-types": "^0.0.3",
-    "@ararog/microblog-validation": "^0.0.1",
+    "@ararog/microblog-types": "^0.0.6",
+    "@ararog/microblog-validation": "^0.0.2",
     "@hookform/resolvers": "^3.10.0",
     "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-router": "^1.92.3",

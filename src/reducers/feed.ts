@@ -22,20 +22,20 @@ export const feedStoreCreator: StateCreator<FeedState> = (set) => ({
   loadFeed: async () => {
     set({ loading: true });
     const response = await api.get<Post[]>("/feed");
-    if (response.ok) {
-      set({ loading: false, feed: response.data });
-    } else {
+    if (! response.ok) {
       set({ loading: false });
+      return;
     }
+    set({ loading: false, feed: response.data });
   },
   loadPost: async (postId?: string) => {
     set({ loading: true });
     const response = await api.get<Post>(`/feed/${postId}`);
-    if (response.ok) {
-      set({ loading: false, post: response.data });
-    } else {
+    if (!response.ok) {
       set({ loading: false });
+      return;
     }
+    set({ loading: false, post: response.data });
   },
 });
 
