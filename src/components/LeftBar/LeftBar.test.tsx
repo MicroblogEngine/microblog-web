@@ -5,5 +5,5 @@ import LeftBar from '.';
 
 it('should render the left bar', () => {
   const { getByText } = render(<LeftBar />);
-  expect(getByText('Home')).toBeInTheDocument();
+  expect(getByText('Microblog')).toBeInTheDocument();
 });
