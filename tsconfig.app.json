@@ -28,6 +28,7 @@
       "@/helpers/*": [ "./src/helpers/*" ],
       "@/models/*": [ "./src/models/*" ],
       "@/reducers/*": [ "./src/reducers/*" ],
+      "@/security/*": [ "./src/security/*" ],
     }
   },
   "include": ["src", "__mocks__"]

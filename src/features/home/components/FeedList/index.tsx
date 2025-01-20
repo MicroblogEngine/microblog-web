@@ -8,7 +8,7 @@ type FeedListProps = {
 
 const FeedList = (props:FeedListProps) => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col mt-20'>
       {
         props.feed?.length == 0 ? 
           <p data-testid="message">No posts to show</p> : 

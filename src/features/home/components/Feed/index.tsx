@@ -8,7 +8,7 @@ const Feed = () => {
   const {feed, loading} = useFeedStore((state: FeedState) => state)
 
   return (
-    <div className="w-3/5">
+    <div className="flex items-center justify-center w-3/5">
       {loading ? <p data-testid="loading">Loading...</p> : <FeedList feed={feed} />}   
     </div>
   );

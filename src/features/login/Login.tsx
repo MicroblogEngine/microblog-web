@@ -1,18 +1,21 @@
+import { useContext } from "react";
+import { useStore } from "zustand";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { LoginFormSchema } from "@ararog/microblog-validation";
 import { LoginForm } from "@ararog/microblog-types";
 import { useForm } from "react-hook-form";
 
-import { useUserStore } from "@/reducers/user";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton";
 import PageTitle from "@/components/PageTitle";
+import { AuthContext } from "@/security/auth";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const login = useUserStore.use.login();
-  const loading = useUserStore.use.loading();
+  const store = useContext(AuthContext);
+  if (!store) throw new Error('Missing AuthContext.Provider in the tree')
+  const login = useStore(store, (s) => s.login)
+  const loading = useStore(store, (s) => s.loading);
 
   const {
     register,

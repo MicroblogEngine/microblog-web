@@ -44,7 +44,7 @@ export const useAuthContext = <T,>(
 
   if (authContext === undefined) {
     throw new Error(
-      'useCounterStoreContext must be used within CounterStoreProvider',
+      'useAuthContext must be used within AuthProvider',
     )
   }
 
