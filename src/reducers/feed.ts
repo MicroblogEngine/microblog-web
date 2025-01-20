@@ -1,14 +1,17 @@
-import { create, StateCreator } from 'zustand';
-import { api } from '@/helpers/api';
-import { Post } from '@/models/feed';
+import { create, StateCreator } from "zustand";
+import { cb } from "@ararog/microblog-types";
+import { createSelectors } from "@ararog/microblog-state";
+
+import { api } from "@/helpers/api";
+import { Post } from "@/models/feed";
 
 export interface FeedState {
-  postId: number | null
-  feed?: Post[]
-  post?: Post
-  loading: boolean
-  loadFeed: () => void
-  loadPost: (postId?: string) => void
+  postId: number | null;
+  feed?: Post[];
+  post?: Post;
+  loading: boolean;
+  loadFeed: cb;
+  loadPost: (postId?: string) => void;
 }
 
 export const feedStoreCreator: StateCreator<FeedState> = (set) => ({
@@ -18,15 +21,23 @@ export const feedStoreCreator: StateCreator<FeedState> = (set) => ({
   loading: false,
   loadFeed: async () => {
     set({ loading: true });
-    const response = await api.get('/feed');
-    set({ loading: false, feed: response.data as Post[] });
+    const response = await api.get<Post[]>("/feed");
+    if (response.ok) {
+      set({ loading: false, feed: response.data });
+    } else {
+      set({ loading: false });
+    }
   },
   loadPost: async (postId?: string) => {
     set({ loading: true });
-    const response = await api.get(`/feed/${postId}`);
-    set({ loading: false, post: response.data as Post })
-  }
+    const response = await api.get<Post>(`/feed/${postId}`);
+    if (response.ok) {
+      set({ loading: false, post: response.data });
+    } else {
+      set({ loading: false });
+    }
+  },
 });
 
 // define the store
-export const useFeedStore = create(feedStoreCreator);
+export const useFeedStore = createSelectors(create(feedStoreCreator));

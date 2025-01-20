@@ -1,28 +1,30 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
+import { SignupFormSchema } from "@ararog/microblog-validation";
+import { cb, SignupForm } from "@ararog/microblog-types";
 
 import { useUserStore } from "@/reducers/user";
-import { SignupForm } from "@/types/form";
-import { SignupSchema } from "@/validation/form-validation";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton";
+import PageTitle from "@/components/PageTitle";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const {signup, loading} = useUserStore(store => store);
+  const signup = useUserStore.use.signup();
+  const loading = useUserStore.use.loading();
 
   const {
     register,
     handleSubmit,
-    formState: {errors},
+    formState: { errors },
   } = useForm<SignupForm>({
-    resolver: zodResolver(SignupSchema),
+    resolver: zodResolver(SignupFormSchema),
     defaultValues: {
-      email: '',
-      username: '',
-      password: '',
-      confirmPassword: '',
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -31,53 +33,61 @@ const Signup = () => {
   };
 
   const onSignupSuccess = () => {
-    navigate({to:'/login'});
+    navigate({ to: "/login" });
   };
-    
+
   return (
-    <div className='flex flex-col w-full h-full bg-white'>
-      <div className='flex flex-col items-center justify-center w-full h-full'>
-        <div className="flex flex-col items-center justify-center w-full h-20">
-          <h1 className='text-2xl font-extrabold text-center text-gray-700'>Signup</h1>
-        </div>
+    <div className="flex flex-col w-full h-full bg-white">
+      <div className="flex flex-col items-center justify-center w-full h-full">
+        <PageTitle text="Signup" />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='flex flex-col items-start'>
-            <label htmlFor='email'>Email:</label>
-            <input id='email' type='email' 
-              {...register('email')}
-              className="p-2 border-2 border-gray-300 rounded-lg w-96" />
+          <div className="flex flex-col items-start">
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              type="email"
+              {...register("email")}
+              className="p-2 border-2 border-gray-300 rounded-lg w-96"
+            />
             {errors.email?.message && (
               <span className="text-red-500">{errors.email?.message}</span>
             )}
 
-            <label htmlFor='email'>Username:</label>
-            <input id='username' 
-              type='text' 
-              {...register('username')}
-              className="p-2 border-2 border-gray-300 rounded-lg w-96" />
+            <label htmlFor="email">Username:</label>
+            <input
+              id="username"
+              type="text"
+              {...register("username")}
+              className="p-2 border-2 border-gray-300 rounded-lg w-96"
+            />
             {errors.username?.message && (
               <span className="text-red-500">{errors.username?.message}</span>
             )}
-            
-            <label htmlFor='password'>Password:</label>  
-            <input id='password' 
-              type='password' 
-              {...register('email')}
-              className="p-2 border-2 border-gray-300 rounded-lg w-96" />
+
+            <label htmlFor="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              {...register("email")}
+              className="p-2 border-2 border-gray-300 rounded-lg w-96"
+            />
             {errors.password?.message && (
               <span className="text-red-500">{errors.password?.message}</span>
             )}
-            
-            <label htmlFor='confirmPassword'>Confirm Password:</label>  
-            <input 
-              id='confirmPassword' 
-              type='password'           
-              {...register('confirmPassword')}
-              className="p-2 border-2 border-gray-300 rounded-lg w-96" />
+
+            <label htmlFor="confirmPassword">Confirm Password:</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              {...register("confirmPassword")}
+              className="p-2 border-2 border-gray-300 rounded-lg w-96"
+            />
             {errors.confirmPassword?.message && (
-              <span className="text-red-500">{errors.confirmPassword?.message}</span>
+              <span className="text-red-500">
+                {errors.confirmPassword?.message}
+              </span>
             )}
-          </div>     
+          </div>
           <RoundedSubmitButton disabled={loading} label="Signup" />
         </form>
       </div>
