@@ -7,9 +7,13 @@ import "@/features/home/components/Feed/Feed.css"
 const Feed = () => {
   const {feed, loading} = useFeedStore((state: FeedState) => state)
 
+  if(loading) {
+    return <p data-testid="loading">Loading...</p>
+  }
+  
   return (
     <div className="flex items-center justify-center w-3/5">
-      {loading ? <p data-testid="loading">Loading...</p> : <FeedList feed={feed} />}   
+      <FeedList feed={feed} />
     </div>
   );
 };
