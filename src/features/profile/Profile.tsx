@@ -1,9 +1,12 @@
+import { useTranslation } from "react-i18next"; 
+
 import PageTitle from "@/components/PageTitle";
 
 const Profile = () => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center">
-      <PageTitle text="Profile" />
+      <PageTitle text={t("Profile")} />
     </div>
   );
 };

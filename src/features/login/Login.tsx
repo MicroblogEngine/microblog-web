@@ -4,24 +4,24 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { LoginFormSchema } from "@ararog/microblog-validation";
 import { LoginForm } from "@ararog/microblog-types";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
+import { useTranslation } from 'react-i18next';
 
+import logo from "@/assets/logo-black.svg";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton";
 import PageTitle from "@/components/PageTitle";
 import { AuthContext } from "@/security/auth";
+import FormField from "@/components/FormField";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const store = useContext(AuthContext);
   if (!store) throw new Error('Missing AuthContext.Provider in the tree')
   const login = useStore(store, (s) => s.login)
   const loading = useStore(store, (s) => s.loading);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginForm>({
+  const methods = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       username: "",
@@ -39,38 +39,41 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <PageTitle text="Login" />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col items-start">
-          <label htmlFor="email">Username</label>
-          <input
-            id="username"
-            type="text"
-            {...register("username")}
-            className="p-2 border-2 border-gray-300 rounded-lg w-96"
-          />
-          {errors.username?.message && (
-            <span className="text-red-500">{errors.username?.message}</span>
-          )}
+      <div className="flex flex-row items-center">
+        <img src={logo} alt="Microblog" className="w-10 h-10 mr-2" />
+        <h1 className="text-2xl font-extrabold text-center text-gray-700">Microblog</h1>
+      </div>
+      <PageTitle text={t("Login")} />
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className="flex flex-col items-start">
+            <FormField 
+              label={t("Username")} 
+              name="username" 
+              type="text" 
+            />
+            <FormField 
+              label={t("Password")} 
+              name="password" 
+              type="password" 
+            />
 
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            {...register("password")}
-            className="p-2 border-2 border-gray-300 rounded-lg w-96"
-          />
-          {errors.password?.message && (
-            <span className="text-red-500">{errors.password?.message}</span>
-          )}
-        </div>
-        <RoundedSubmitButton disabled={loading} label="Login" />
-      </form>
+            <span className="mt-2 h-15">
+              {t("Forgot your password?")} {" "}
+              <Link className="font-bold text-gray-800" to="/forgot-password">
+                {t("Reset")}
+              </Link>{" "}
+              here.
+            </span>
+          </div>
+          <RoundedSubmitButton disabled={loading} label={t("Login")} />
+        </form>
+      </FormProvider>
       <div>
         <span className="mt-2 h-15">
-          Don't have an account?{" "}
+          {t("Don't have an account?")} {" "}
           <Link className="font-bold text-gray-800" to="/signup">
-            Signup
+            {t("Register")}
           </Link>{" "}
           here.
         </span>

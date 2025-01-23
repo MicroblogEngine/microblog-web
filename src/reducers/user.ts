@@ -1,5 +1,5 @@
 import { create, StateCreator } from "zustand";
-import { cb, SignupForm, VerificationForm } from "@ararog/microblog-types";
+import { cb, CheckResetPasswordForm, ForgotPasswordForm, ResetPasswordForm, SignupForm, VerificationForm } from "@ararog/microblog-types";
 import { createSelectors } from "@ararog/microblog-state";
 
 import { api } from "@/helpers/api";
@@ -9,36 +9,43 @@ export interface UserState {
   user?: User;
   message?: string;
   loading: boolean;
-  verifying: boolean;
-  verify: (data: VerificationForm, verifySuccess: cb) => void;
+  verifyingCode: boolean;
+  sendingMail: boolean;
+  resettingPassword: boolean;
+  verifyCode: (data: VerificationForm, verifySuccess: cb) => void;
   login: (username: string, password: string, loginSuccess: cb) => void;
   signup: (data: SignupForm, signupSuccess: cb) => void;
+  forgotPassword: (data: ForgotPasswordForm, forgotPasswordSuccess: cb) => void;
+  checkResetPasswordToken: (data: CheckResetPasswordForm, checkResetPasswordTokenSuccess: cb) => void;
+  resetPassword: (data: ResetPasswordForm, resetPasswordSuccess: cb) => void;
 }
 
 export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   user: undefined,
   loading: false,
-  verifying: false,
-  verify: async (data, verifySuccess) => {
+  verifyingCode: false,
+  sendingMail: false,
+  resettingPassword: false,
+  verifyCode: async (data, verifySuccess) => {
     try {
-      set({ verifying: true });
+      set({ verifyingCode: true });
       
       data.userId = get().user!.id;
       
       const response = await api.post<VerificationForm>("/auth/email/verify", data);
       if (!response.ok) {
         const message = "Invalid code!";
-        set({ verifying: false, message });
+        set({ verifyingCode: false, message });
         return;
       }
 
       set({
-        verifying: false,
+        verifyingCode: false,
       });
       verifySuccess();
 
     } catch {
-      set({ verifying: false });
+      set({ verifyingCode: false });
     }
   },
   login: async (username, password, loginSuccess) => {
@@ -82,6 +89,46 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       signupSuccess();
     } catch {
       set({ loading: false });
+    }
+  },
+  forgotPassword: async (data, forgotPasswordSuccess) => {
+    try {
+      set({ sendingMail: true });
+      const response = await api.post<ForgotPasswordForm>("/auth/password/forgot", data);
+      if (!response.ok) {
+        set({ sendingMail: false });
+        return;
+      }
+
+      forgotPasswordSuccess();
+    } catch {
+      set({ sendingMail: false });
+    }
+  },
+  checkResetPasswordToken: async (data, checkResetPasswordTokenSuccess) => {
+    try {
+      set({ resettingPassword: true });
+      const response = await api.post<ResetPasswordForm>("/auth/password/reset/check-token", data);
+      if (!response.ok) {
+        set({ resettingPassword: false });
+        return;
+      }
+      checkResetPasswordTokenSuccess();
+    } catch {
+      set({ resettingPassword: false });
+    }
+  },
+  resetPassword: async (data, resetPasswordSuccess) => {
+    try {
+      set({ resettingPassword: true });
+      const response = await api.post<ResetPasswordForm>("/auth/password/reset", data);
+      if (!response.ok) {
+        set({ resettingPassword: false });
+        return;
+      }
+      resetPasswordSuccess();
+    } catch {
+      set({ resettingPassword: false });
     }
   },
 });

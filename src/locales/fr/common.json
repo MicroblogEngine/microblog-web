@@ -1,0 +1,18 @@
+{
+  "Welcome to React": "Bienvenue à React et react-i18next",
+  "Username": "Nom d'utilisateur",
+  "Password": "Mot de passe",
+  "ForgotPassword": "Mot de passe oublié?",
+  "ResetPassword": "Réinitialiser le mot de passe",
+  "Login": "Connexion",
+  "Register": "Inscription",
+  "Logout": "Déconnexion",
+  "Reset": "Réinitialiser",
+  "DontHaveAnAccount": "Vous n'avez pas de compte?",
+  "RegisterHere": "Inscrivez-vous ici.",
+  "Code": "Code",
+  "Verify": "Vérifier",
+  "Sending": "Envoi...",
+  "ResettingPassword": "Réinitialisation du mot de passe...",
+  "Verifying": "Vérification..."
+} 

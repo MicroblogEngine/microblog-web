@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 
 // Import the generated route tree
+import './i18n';
 import { routeTree } from './routeTree.gen'
 import { AuthProvider, useAuthContext } from './security/auth'
 
