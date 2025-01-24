@@ -1,13 +1,21 @@
 // contexts/use-counter-store-context.tsx
 import { type ReactNode, createContext, useContext, useRef } from 'react'
-import { createStore } from 'zustand'
+import { create } from 'zustand'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
 import { shallow } from 'zustand/shallow'
+import { merge } from 'ts-deepmerge'
 
 import { UserState, userStoreCreator } from '@/reducers/user'
+import { persist } from 'zustand/middleware'
 
 export const createAuthStore = () => {
-  return createStore<UserState>(userStoreCreator)
+  return create(persist(userStoreCreator, {
+    name: 'microblog-user',
+    merge: (persistedState: unknown, currentState: UserState) => merge(currentState, persistedState as UserState),
+    onRehydrateStorage: (state) => {
+      return () => state.setHasHydrated(true)
+    }    
+  }))
 }
 
 export type AuthStoreApi = ReturnType<typeof createAuthStore>

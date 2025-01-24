@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@ararog/microblog-state": "^0.0.1",
-    "@ararog/microblog-types": "^0.0.10",
-    "@ararog/microblog-validation": "^0.0.6",
+    "@ararog/microblog-types": "^0.0.11",
+    "@ararog/microblog-validation": "^0.0.7",
     "@hookform/resolvers": "^3.10.0",
     "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-router": "^1.92.3",
@@ -32,6 +32,7 @@
     "react-virtualized": "^9.22.6",
     "swr": "^2.3.0",
     "tailwindcss": "^3.4.17",
+    "ts-deepmerge": "^7.0.2",
     "zod": "^3.24.1",
     "zustand": "^5.0.2"
   },

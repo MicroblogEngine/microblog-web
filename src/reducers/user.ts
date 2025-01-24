@@ -1,9 +1,11 @@
 import { create, StateCreator } from "zustand";
 import { cb, CheckResetPasswordForm, ForgotPasswordForm, ResetPasswordForm, SignupForm, VerificationForm } from "@ararog/microblog-types";
 import { createSelectors } from "@ararog/microblog-state";
+import { persist } from 'zustand/middleware'
 
 import { api } from "@/helpers/api";
 import { LoginResponse, User } from "@/models/user";
+import { merge } from "ts-deepmerge";
 
 export interface UserState {
   user?: User;
@@ -12,6 +14,8 @@ export interface UserState {
   verifyingCode: boolean;
   sendingMail: boolean;
   resettingPassword: boolean;
+  hasHydrated: boolean;
+  setHasHydrated: (state: boolean) => void;
   verifyCode: (data: VerificationForm, verifySuccess: cb) => void;
   login: (username: string, password: string, loginSuccess: cb) => void;
   signup: (data: SignupForm, signupSuccess: cb) => void;
@@ -26,6 +30,12 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   verifyingCode: false,
   sendingMail: false,
   resettingPassword: false,
+  hasHydrated: false,
+  setHasHydrated: (state) => {
+    set({
+      hasHydrated: state
+    });
+  },
   verifyCode: async (data, verifySuccess) => {
     try {
       set({ verifyingCode: true });
@@ -134,4 +144,10 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
 });
 
 // define the store
-export const useUserStore = createSelectors(create(userStoreCreator));
+export const useUserStore = createSelectors(create(persist(userStoreCreator, {
+  name: 'microblog-user',
+  merge: (persistedState: unknown, currentState: UserState) => merge(currentState, persistedState as UserState),
+  onRehydrateStorage: (state) => {
+    return () => state.setHasHydrated(true)
+  }
+})));
