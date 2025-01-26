@@ -14,7 +14,7 @@ function Home() {
   }, [])
 
   return (
-    <div className='flex flex-col w-full App sm:flex-row columns-3'>
+    <div className='flex flex-row w-full App columns-3'>
       <LeftBar />
       <Feed />
       <RightBar />

@@ -1,8 +1,9 @@
 import { memo } from "react";
 
+import "@/features/home/components/Feed/Feed.css"
 import { FeedState, useFeedStore } from "@/reducers/feed";
 import FeedList from "@/features/home/components/FeedList";
-import "@/features/home/components/Feed/Feed.css"
+import Composer from "@/features/home/components/Composer";
 
 const Feed = () => {
   const {feed, loading} = useFeedStore((state: FeedState) => state)
@@ -12,7 +13,8 @@ const Feed = () => {
   }
   
   return (
-    <div className="flex items-center justify-center w-3/5">
+    <div className="flex flex-col items-center justify-center w-3/5 md:w-full">
+      <Composer />
       <FeedList feed={feed} />
     </div>
   );

@@ -1,32 +1,47 @@
 import { create, StateCreator } from "zustand";
-import { cb, CheckResetPasswordForm, ForgotPasswordForm, ResetPasswordForm, SignupForm, VerificationForm } from "@ararog/microblog-types";
+import { 
+  ApiError, 
+  UserApiError,
+  Callback,
+  MessageCallback,
+  ForgotPasswordForm, 
+  ResetPasswordForm, 
+  SignupDetailsForm, 
+  SignupUserForm, 
+  VerificationForm 
+} from "@ararog/microblog-types";
+import { ErrorMessages } from "@ararog/microblog-server";
 import { createSelectors } from "@ararog/microblog-state";
 import { persist } from 'zustand/middleware'
 
 import { api } from "@/helpers/api";
 import { LoginResponse, User } from "@/models/user";
 import { merge } from "ts-deepmerge";
-
 export interface UserState {
   user?: User;
-  message?: string;
+  isLoggedIn: boolean;
+  errors?: UserApiError["errors"];
   loading: boolean;
+  signupDetails?: SignupDetailsForm;
   verifyingCode: boolean;
   sendingMail: boolean;
   resettingPassword: boolean;
   hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
-  verifyCode: (data: VerificationForm, verifySuccess: cb) => void;
-  login: (username: string, password: string, loginSuccess: cb) => void;
-  signup: (data: SignupForm, signupSuccess: cb) => void;
-  forgotPassword: (data: ForgotPasswordForm, forgotPasswordSuccess: cb) => void;
-  checkResetPasswordToken: (data: CheckResetPasswordForm, checkResetPasswordTokenSuccess: cb) => void;
-  resetPassword: (data: ResetPasswordForm, resetPasswordSuccess: cb) => void;
+  verifyCode: (data: VerificationForm, verifySuccess: Callback) => void;
+  login: (username: string, password: string, loginSuccess: Callback, loginFailed: MessageCallback) => void;
+  updateSignupDetails: (data: SignupDetailsForm, updateSignupDetailsSuccess: Callback) => void;
+  completeSignup: (data: SignupUserForm, completeSignupSuccess: Callback) => void;
+  forgotPassword: (data: ForgotPasswordForm, forgotPasswordSuccess: Callback) => void;
+  resetPassword: (data: ResetPasswordForm, resetPasswordSuccess: Callback) => void;
 }
 
 export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   user: undefined,
+  isLoggedIn: false,
+  errors: undefined,
   loading: false,
+  signupDetails: undefined,
   verifyingCode: false,
   sendingMail: false,
   resettingPassword: false,
@@ -40,12 +55,9 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
     try {
       set({ verifyingCode: true });
       
-      data.userId = get().user!.id;
-      
-      const response = await api.post<VerificationForm>("/auth/email/verify", data);
+      const response = await api.post<VerificationForm, ApiError>("/auth/email/verify", data);
       if (!response.ok) {
-        const message = "Invalid code!";
-        set({ verifyingCode: false, message });
+        set({ verifyingCode: false, errors: response?.data?.errors });
         return;
       }
 
@@ -58,17 +70,22 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       set({ verifyingCode: false });
     }
   },
-  login: async (username, password, loginSuccess) => {
+  login: async (username, password, loginSuccess, loginFailed) => {
     try {
-      set({ loading: true });
-      const response = await api.post<LoginResponse>("/auth/login", {
+      set({ loading: true, errors: undefined });
+      const response = await api.post<LoginResponse, UserApiError>("/auth/login", {
         username,
         password,
       });
 
-      if (response.status === 401) {
-        const message = "Invalid username or password";
-        set({ loading: false, message });
+      if (!response.ok) {
+        if(response?.data?.errors?.user?.includes(ErrorMessages.user.emailNotVerified)) {
+          set({loading: false, user: response?.data?.user});
+          loginFailed(ErrorMessages.user.emailNotVerified);
+          return;
+        }
+
+        set({ loading: false, errors: response?.data?.errors });
         return;
       }
 
@@ -76,6 +93,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
         localStorage.setItem("token", response.data.token);
         set({
           user: response.data.user,
+          isLoggedIn: true,
           loading: false,
         });
         loginSuccess();
@@ -84,19 +102,30 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       set({ loading: false });
     }
   },
-  signup: async (data, signupSuccess) => {
+  updateSignupDetails: async (data, updateSignupDetailsSuccess) => {
+    try {
+      set({ loading: true, signupDetails: { ...data} });
+      updateSignupDetailsSuccess();
+    } catch {
+      set({ loading: false });
+    }
+  },
+  completeSignup: async (data, completeSignupSuccess) => {
     try {
       set({ loading: true });
-      const response = await api.post<User>("/auth/signup", data);
+      const response = await api.post<User, ApiError>("/auth/signup", {
+        ...get().signupDetails,
+        ...data,
+      });
       if (!response.ok) {
-        set({ loading: false });
+        set({ loading: false, errors: response?.data?.errors });
         return;
       }
       set({
         user: response?.data,
         loading: false,
       });
-      signupSuccess();
+      completeSignupSuccess();
     } catch {
       set({ loading: false });
     }
@@ -104,9 +133,9 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   forgotPassword: async (data, forgotPasswordSuccess) => {
     try {
       set({ sendingMail: true });
-      const response = await api.post<ForgotPasswordForm>("/auth/password/forgot", data);
+      const response = await api.post<ForgotPasswordForm, ApiError>("/auth/password/forgot", data);
       if (!response.ok) {
-        set({ sendingMail: false });
+        set({ sendingMail: false, errors: response?.data?.errors });
         return;
       }
 
@@ -115,25 +144,12 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       set({ sendingMail: false });
     }
   },
-  checkResetPasswordToken: async (data, checkResetPasswordTokenSuccess) => {
-    try {
-      set({ resettingPassword: true });
-      const response = await api.post<ResetPasswordForm>("/auth/password/reset/check-token", data);
-      if (!response.ok) {
-        set({ resettingPassword: false });
-        return;
-      }
-      checkResetPasswordTokenSuccess();
-    } catch {
-      set({ resettingPassword: false });
-    }
-  },
   resetPassword: async (data, resetPasswordSuccess) => {
     try {
       set({ resettingPassword: true });
-      const response = await api.post<ResetPasswordForm>("/auth/password/reset", data);
+      const response = await api.post<ResetPasswordForm, ApiError>("/auth/password/reset", data);
       if (!response.ok) {
-        set({ resettingPassword: false });
+        set({ resettingPassword: false, errors: response?.data?.errors });
         return;
       }
       resetPasswordSuccess();

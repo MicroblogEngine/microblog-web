@@ -6,9 +6,10 @@ interface FormFieldProps {
   label: string;
   name: string;
   type: string;
+  tabIndex?: number;
 }
 
-const FormField = ({ label, name, type }: FormFieldProps) => {
+const FormField = ({ label, name, type, tabIndex }: FormFieldProps) => {
   const { control, formState: { errors } } = useFormContext();
 
   return <>
@@ -16,6 +17,7 @@ const FormField = ({ label, name, type }: FormFieldProps) => {
     <input
       id={name}
       type={type}
+      tabIndex={tabIndex}
       {...control.register(name)}
       className="p-2 border-2 border-gray-300 rounded-lg w-96"
     />

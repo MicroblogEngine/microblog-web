@@ -44,16 +44,19 @@ const ResetPassword = () => {
               label={t("Email")} 
               name="email" 
               type="email" 
+              tabIndex={1}
             />
             <FormField 
               label={t("Password")} 
               name="password" 
               type="password" 
+              tabIndex={2}
             />
             <FormField 
               label={t("Confirm Password")} 
               name="confirmPassword" 
               type="password" 
+              tabIndex={3}
             />
           </div>     
           <RoundedSubmitButton disabled={resettingPassword} label={resettingPassword ? t("Resetting Password...") : t("Send")} />
