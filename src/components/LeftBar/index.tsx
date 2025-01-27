@@ -1,5 +1,14 @@
 import { memo } from "react";
-import { faHome, faSearch, faBell, faEnvelope, faUsers, faUser, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faHome, 
+  faSearch, 
+  faBell, 
+  faEnvelope, 
+  faUsers, 
+  faUser, 
+  faPlus, 
+  faEllipsisH 
+} from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "@tanstack/react-router";
 
 import "@/components/LeftBar/LeftBar.css"
@@ -8,8 +17,16 @@ import MenuItem from "@/components/MenuItem";
 import Logo from "@/assets/logo-black.svg";
 import RoundedButton from "@/components/RoundedButton";
 import { t } from "i18next";
+import { Profile } from "@/models/profile";
+import { User } from "@/models/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LeftBar = () => {
+type LeftBarProps = {
+  user?: User;
+  profile?: Profile;
+}
+
+const LeftBar = ({ user, profile }: LeftBarProps) => {
   const navigate = useNavigate();
 
   const onNewPostClick = () => {
@@ -56,11 +73,24 @@ const LeftBar = () => {
       </Menu>
 
       <RoundedButton 
-        className="bg-black rounded-full max-xl:w-14 max-xl:h-14 h-14" 
+        className="bg-black rounded-full h-14 w-52 max-xl:w-14 max-xl:h-14" 
+        labelClassName="text-lg"
         title={t("New Post")} 
         icon={faPlus} 
         onClick={onNewPostClick}
       />
+      <div className="flex flex-col justify-end pt-10">
+        {user && profile && (
+          <div className="flex flex-row items-center p-2 rounded-full cursor-pointer max-xl:p-0 h-14 hover:bg-slate-200 w-52 max-xl:w-14 max-xl:h-14">
+            <img src="https://placehold.co/100x100" alt="user" className="w-12 h-12 rounded-full max-xl:flex" />
+            <div className="flex flex-col justify-start hidden w-full ml-2 xl:flex">
+              <span className="text-lg font-bold text-black">{profile.name}</span>
+              <span className="text-sm text-black">@{user.username}</span>
+            </div>
+            <FontAwesomeIcon icon={faEllipsisH} className="hidden mr-5 text-black xl:flex" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -8,7 +8,9 @@
   "Register": "Register",
   "Logout": "Logout",
   "Reset": "Reset",
-  "Dont have an account": "Don't have an account?",
+  "Don't have an account?": "Don't have an account?",
+  "Forgot your password?": "Forgot your password?",
+  "here": "here",
   "Register here": "Register here.",
   "Code": "Code",
   "Verify": "Verify",
@@ -49,5 +51,6 @@
   "Invalid code": "Invalid code",
   "Invalid name": "Invalid name",
   "Name must be more than 5 characters": "Name must be more than 5 characters",
-  "Password confirmation is required": "Password confirmation is required"
+  "Password confirmation is required": "Password confirmation is required",
+  "Profile not found": "Profile not found"
 } 

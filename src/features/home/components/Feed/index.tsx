@@ -13,7 +13,7 @@ const Feed = () => {
   }
   
   return (
-    <div className="flex flex-col items-center justify-center w-3/5 md:w-full">
+    <div className="flex flex-col items-center justify-center w-full">
       <Composer />
       <FeedList feed={feed} />
     </div>

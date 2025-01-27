@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignupDetailsFormSchema } from "@ararog/microblog-validation";
 import { SignupDetailsForm } from "@ararog/microblog-types";
 import { useTranslation } from "react-i18next";
-import { parse } from 'date-fns';
 
 import { useUserStore } from "@/reducers/user";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
@@ -20,13 +19,7 @@ const SignupDetails = () => {
   const loading = useUserStore.use.loading();
 
   const methods = useForm<SignupDetailsForm>({
-    resolver: async (data, context, options) => {
-      if (data.birthDate) {
-        data.birthDate = parse(`${data.birthDate}`, "yyyy-MM-dd", new Date());
-      }
-      const result = await zodResolver(SignupDetailsFormSchema)(data, context, options);
-      return result;
-    },
+    resolver: zodResolver(SignupDetailsFormSchema),
     defaultValues: {
       name: "",
       birthDate: undefined,

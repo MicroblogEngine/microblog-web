@@ -8,7 +8,9 @@
   "Register": "Registrarse",
   "Logout": "Cerrar sesión",
   "Reset": "Redefinir",
-  "Dont have an account": "¿No tienes una cuenta?",
+  "Don't have an account?": "¿No tienes una cuenta?",
+  "Forgot your password?": "¿Olvidaste tu contraseña?",
+  "here": "aquí",
   "Register here": "Regístrate aquí.",
   "Code": "Código",
   "Verify": "Verificar",
@@ -48,5 +50,6 @@
   "Invalid code": "Código inválido",
   "Invalid name": "Nombre inválido",
   "Name must be more than 5 characters": "Nombre debe tener más de 5 caracteres",
-  "Password confirmation is required": "Confirmación de contraseña es requerida"
+  "Password confirmation is required": "Confirmación de contraseña es requerida",
+  "Profile not found": "Perfil no encontrado"
 } 

@@ -9,6 +9,8 @@
   "Logout": "登出",
   "Reset": "重置",
   "Dont have an account": "没有账户？",
+  "Forgot your password?": "忘记密码？",
+  "here": "这里",
   "Register here": "在这里注册。",
   "Code": "代码",
   "Verify": "验证",
@@ -48,5 +50,6 @@
   "Invalid code": "无效的代码",
   "Invalid name": "无效的名字",
   "Name must be more than 5 characters": "名字必须超过5个字符",
-  "Password confirmation is required": "密码确认是必需的"
+  "Password confirmation is required": "密码确认是必需的",
+  "Profile not found": "个人资料未找到"
 } 

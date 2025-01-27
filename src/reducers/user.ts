@@ -15,10 +15,13 @@ import { createSelectors } from "@ararog/microblog-state";
 import { persist } from 'zustand/middleware'
 
 import { api } from "@/helpers/api";
-import { LoginResponse, User } from "@/models/user";
+import { LoginResponse } from "@/models/auth";
+import { User } from "@/models/user";
 import { merge } from "ts-deepmerge";
+import { Profile } from "@/models/profile";
 export interface UserState {
   user?: User;
+  profile?: Profile;
   isLoggedIn: boolean;
   errors?: UserApiError["errors"];
   loading: boolean;
@@ -38,6 +41,7 @@ export interface UserState {
 
 export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   user: undefined,
+  profile: undefined,
   isLoggedIn: false,
   errors: undefined,
   loading: false,
@@ -80,7 +84,10 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
 
       if (!response.ok) {
         if(response?.data?.errors?.user?.includes(ErrorMessages.user.emailNotVerified)) {
-          set({loading: false, user: response?.data?.user});
+          set({
+            loading: false,
+            user: response?.data?.user,
+          });
           loginFailed(ErrorMessages.user.emailNotVerified);
           return;
         }
@@ -93,6 +100,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
         localStorage.setItem("token", response.data.token);
         set({
           user: response.data.user,
+          profile: response.data.profile,
           isLoggedIn: true,
           loading: false,
         });

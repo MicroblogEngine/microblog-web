@@ -4,8 +4,3 @@ export type User = {
   email?: string;
   emailVerified?: boolean;
 };
-
-export type LoginResponse = {
-  user: User;
-  token: string;
-};

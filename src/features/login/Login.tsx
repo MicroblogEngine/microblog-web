@@ -75,7 +75,7 @@ const Login = () => {
               <Link className="font-bold text-gray-800" to="/forgot-password">
                 {t("Reset")}
               </Link>{" "}
-              here.
+              {t("here")}.
             </span>
           </div>
           <RoundedSubmitButton disabled={loading} label={loading ? t("Logging in...") : t("Login")} />
@@ -87,7 +87,7 @@ const Login = () => {
           <Link className="font-bold text-gray-800" to="/signup">
             {t("Register")}
           </Link>{" "}
-          here.
+          {t("here")}.
         </span>
       </div>
     </div>

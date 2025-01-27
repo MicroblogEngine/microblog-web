@@ -4,11 +4,13 @@
   "Password": "Senha",
   "Forgot Password": "Esqueceu sua senha?",
   "Reset Password": "Redefinir senha",
-  "Login": "Login",
-  "Register": "Cadastro",
+  "Login": "Entrar",
+  "Register": "Cadastre-se",
   "Logout": "Sair",
   "Reset": "Redefinir",
-  "Dont Have An Account": "Você não tem uma conta?",
+  "Don't have an account?": "Você não tem uma conta?",
+  "Forgot your password?": "Esqueceu sua senha?",
+  "here": "aqui",
   "Register here": "Cadastre-se aqui.",
   "Code": "Código",
   "Verify": "Verificar",
@@ -48,5 +50,6 @@
   "Invalid code": "Código inválido",
   "Invalid name": "Nome inválido",
   "Name must be more than 5 characters": "Nome deve ter mais de 5 caracteres",
-  "Password confirmation is required": "Confirmação de senha é necessária"
+  "Password confirmation is required": "Confirmação de senha é necessária",
+  "Profile not found": "Perfil não encontrado"
 } 
