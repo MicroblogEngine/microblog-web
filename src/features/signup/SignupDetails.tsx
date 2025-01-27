@@ -3,11 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignupDetailsFormSchema } from "@ararog/microblog-validation";
 import { SignupDetailsForm } from "@ararog/microblog-types";
 import { useTranslation } from "react-i18next";
+import { parse } from 'date-fns';
 
 import { useUserStore } from "@/reducers/user";
-import RoundedSubmitButton from "@/components/RoundedSubmitButton";
-import FormField from "@/components/FormField";
+import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
+import FormField from "@/components/FormField/FormField";
 import { useWizard } from 'react-use-wizard';
+import StepTitle from './components/StepTitle';
+
 
 const SignupDetails = () => {
   const { nextStep } = useWizard();
@@ -17,10 +20,16 @@ const SignupDetails = () => {
   const loading = useUserStore.use.loading();
 
   const methods = useForm<SignupDetailsForm>({
-    resolver: zodResolver(SignupDetailsFormSchema),
+    resolver: async (data, context, options) => {
+      if (data.birthDate) {
+        data.birthDate = parse(`${data.birthDate}`, "yyyy-MM-dd", new Date());
+      }
+      const result = await zodResolver(SignupDetailsFormSchema)(data, context, options);
+      return result;
+    },
     defaultValues: {
       name: "",
-      birthDate: "",
+      birthDate: undefined,
     },
   });  
 
@@ -36,7 +45,8 @@ const SignupDetails = () => {
     <div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start gap-2">
+            <StepTitle title={t("Your Personal Information")} />
             <FormField 
               label={t("Name")} 
               name="name" 
@@ -44,8 +54,8 @@ const SignupDetails = () => {
             />
             <FormField 
               label={t("Birth Date")} 
-              name="username" 
-              type="text" 
+              name="birthDate"
+              type="date" 
             />
           </div>
           <RoundedSubmitButton disabled={loading} label={t("Continue")} />

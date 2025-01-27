@@ -8,12 +8,12 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from 'react-i18next';
 
 import logo from "@/assets/logo-black.svg";
-import RoundedSubmitButton from "@/components/RoundedSubmitButton";
-import PageTitle from "@/components/PageTitle";
+import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
+import PageTitle from "@/components/PageTitle/PageTitle";
 import { AuthContext } from "@/security/auth";
-import FormField from "@/components/FormField";
+import FormField from "@/components/FormField/FormField";
 import { ErrorMessages } from "@ararog/microblog-server";
-import { SystemErrors } from "@/components/SystemErrors";
+import { SystemErrors } from "@/components/SystemErrors/SystemErrors";
 
 const Login = () => {
   const navigate = useNavigate();

@@ -103,12 +103,8 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
     }
   },
   updateSignupDetails: async (data, updateSignupDetailsSuccess) => {
-    try {
-      set({ loading: true, signupDetails: { ...data} });
-      updateSignupDetailsSuccess();
-    } catch {
-      set({ loading: false });
-    }
+    set({ signupDetails: { ...data} });
+    updateSignupDetailsSuccess();
   },
   completeSignup: async (data, completeSignupSuccess) => {
     try {

@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useUserStore } from "@/reducers/user";
 import {VerificationForm} from '@ararog/microblog-types';
 import {VerifyPasswordFormSchema} from '@ararog/microblog-validation';
-import RoundedSubmitButton from "@/components/RoundedSubmitButton";
-import PageTitle from "@/components/PageTitle";
-import FormField from "@/components/FormField";
-import { SystemErrors } from "@/components/SystemErrors";
+import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
+import PageTitle from "@/components/PageTitle/PageTitle";
+import FormField from "@/components/FormField/FormField";
+import { SystemErrors } from "@/components/SystemErrors/SystemErrors";
 
 const Verify = () => {
   const navigate = useNavigate();

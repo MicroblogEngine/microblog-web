@@ -3,17 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface RoundedButtonProps {
   title: string;
-  icon: IconDefinition;
+  className?: string;
+  labelClassName?: string;
+  icon?: IconDefinition;
   onClick: () => void;
+  disabled?: boolean;
 } 
 
-const RoundedButton = ({ title, icon, onClick }: RoundedButtonProps) => {
+const RoundedButton = ({ title, className, icon, onClick, disabled = false, labelClassName}: RoundedButtonProps) => {
   return (
     <div 
-      className="flex flex-row items-center justify-center w-full text-white bg-black rounded-full cursor-pointer max-xl:w-14 max-xl:h-14 h-14" 
-      onClick={onClick}>
-      <FontAwesomeIcon icon={icon} width={32} height={32} color='white' className="hidden max-xl:flex" />
-      <span className="hidden text-2xl font-bold xl:flex">{title}</span>
+      className={`flex flex-row items-center justify-center w-full text-white ${className} ${disabled ? 'bg-gray-300' : 'bg-gray-600'}`} 
+      onClick={disabled ? undefined : onClick}>
+      {icon && <FontAwesomeIcon icon={icon} width={32} height={32} color='white' className="hidden max-xl:flex" />}
+      <span className={`hidden text-2xl font-bold xl:flex ${labelClassName}`}>{title}</span>
     </div>
   );
 };

@@ -55,7 +55,12 @@ const LeftBar = () => {
         <MenuItem title={t("Profile")} icon={faUser} onClick={onProfileClick} />
       </Menu>
 
-      <RoundedButton title={t("New Post")} icon={faPlus} onClick={onNewPostClick} />
+      <RoundedButton 
+        className="bg-black rounded-full max-xl:w-14 max-xl:h-14 h-14" 
+        title={t("New Post")} 
+        icon={faPlus} 
+        onClick={onNewPostClick}
+      />
     </div>
   );
 };

@@ -6,8 +6,9 @@ import { SignupUserForm } from "@ararog/microblog-types";
 import { useTranslation } from "react-i18next";
 
 import { useUserStore } from "@/reducers/user";
-import RoundedSubmitButton from "@/components/RoundedSubmitButton";
-import FormField from "@/components/FormField";
+import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
+import FormField from "@/components/FormField/FormField";
+import StepTitle from './components/StepTitle';
 
 const SignupUser = () => {
   const navigate = useNavigate();
@@ -38,7 +39,8 @@ const SignupUser = () => {
     <div>
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start gap-2">
+            <StepTitle title={t("Your Account Details")} />
             <FormField 
               label={t("Email")} 
               name="email" 

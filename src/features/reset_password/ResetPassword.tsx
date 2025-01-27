@@ -5,9 +5,9 @@ import {ResetPasswordForm} from '@ararog/microblog-types';
 import {ResetPasswordFormSchema} from '@ararog/microblog-validation'
 import { useTranslation } from "react-i18next";
 
-import PageTitle from '@/components/PageTitle';
-import FormField from '@/components/FormField';
-import RoundedSubmitButton from '@/components/RoundedSubmitButton';
+import PageTitle from '@/components/PageTitle/PageTitle';
+import FormField from '@/components/FormField/FormField';
+import RoundedSubmitButton from '@/components/RoundedSubmitButton/RoundedSubmitButton';
 import { useUserStore } from "@/reducers/user";
 
 const ResetPassword = () => {

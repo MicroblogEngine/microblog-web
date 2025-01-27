@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import "@/components/RightBar/RightBar.css"
-import Feature from "@/components/Feature";
+import FeedFeature from "@/components/FeedFeature";
 import { t } from "i18next";
 
 const RightBar = () => {
@@ -10,12 +10,12 @@ const RightBar = () => {
       <div className="flex flex-row w-full">
         <input type="text" placeholder={t("Search")} className="w-full h-10 p-2 border-2 rounded-full border-slate-400" />
       </div>
-      <Feature title={t("Trending")}>
+      <FeedFeature title={t("Trending")}>
         <span>Something</span>
-      </Feature>
-      <Feature title={t("Who to follow")}>
+      </FeedFeature>
+      <FeedFeature title={t("Who to follow")}>
         <span>Something</span>
-      </Feature>
+      </FeedFeature>
     </div>
   );
 };
