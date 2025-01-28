@@ -2,8 +2,8 @@
   "Welcome to React": "Bem-vindo ao React e react-i18next",
   "Username": "Usuário",
   "Password": "Senha",
-  "Forgot Password": "Esqueceu sua senha?",
-  "Reset Password": "Redefinir senha",
+  "Forgot password": "Esqueceu sua senha?",
+  "Reset password": "Redefinir senha",
   "Login": "Entrar",
   "Register": "Cadastre-se",
   "Logout": "Sair",
@@ -51,5 +51,10 @@
   "Invalid name": "Nome inválido",
   "Name must be more than 5 characters": "Nome deve ter mais de 5 caracteres",
   "Password confirmation is required": "Confirmação de senha é necessária",
-  "Profile not found": "Perfil não encontrado"
+  "Profile not found": "Perfil não encontrado",
+  "Forgot Password": "Esqueceu sua senha?",
+  "Reset Password": "Redefinir senha",
+  "Password Reset": "Redefinir senha",
+  "Send Email": "Enviar email",
+  "Sending Email": "Enviando email..."
 } 

@@ -7,13 +7,13 @@ import { LoginForm } from "@ararog/microblog-types";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from 'react-i18next';
 
-import logo from "@/assets/logo-black.svg";
 import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitButton";
 import PageTitle from "@/components/PageTitle/PageTitle";
 import { AuthContext } from "@/security/auth";
 import FormField from "@/components/FormField/FormField";
 import { ErrorMessages } from "@ararog/microblog-server";
 import { SystemErrors } from "@/components/SystemErrors/SystemErrors";
+import PublicPage from "@/components/PublicPage";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,16 +47,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-row items-center">
-        <img src={logo} alt="Microblog" className="w-10 h-10 mr-2" />
-        <h1 className="text-2xl font-extrabold text-center text-gray-700">Microblog</h1>
-      </div>
+    <PublicPage>
       <PageTitle text={t("Login")} />
       {errors && <SystemErrors errors={errors["user"]} />}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start gap-2">
             <FormField 
               tabIndex={1}
               label={t("Username")} 
@@ -90,7 +86,7 @@ const Login = () => {
           {t("here")}.
         </span>
       </div>
-    </div>
+    </PublicPage>
   );
 };
 

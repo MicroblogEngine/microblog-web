@@ -33,6 +33,7 @@ export interface UserState {
   setHasHydrated: (state: boolean) => void;
   verifyCode: (data: VerificationForm, verifySuccess: Callback) => void;
   login: (username: string, password: string, loginSuccess: Callback, loginFailed: MessageCallback) => void;
+  logout: (logoutSuccess: Callback) => void;
   updateSignupDetails: (data: SignupDetailsForm, updateSignupDetailsSuccess: Callback) => void;
   completeSignup: (data: SignupUserForm, completeSignupSuccess: Callback) => void;
   forgotPassword: (data: ForgotPasswordForm, forgotPasswordSuccess: Callback) => void;
@@ -70,7 +71,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       });
       verifySuccess();
 
-    } catch {
+    } finally {
       set({ verifyingCode: false });
     }
   },
@@ -106,9 +107,22 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
         });
         loginSuccess();
       }
-    } catch {
+    } finally {
       set({ loading: false });
     }
+  },
+  logout: (logoutSuccess) => {
+    localStorage.removeItem("token");
+    set({
+      user: undefined,
+      profile: undefined,
+      isLoggedIn: false,
+      loading: false,
+      resettingPassword: false,
+      sendingMail: false,
+      verifyingCode: false,
+    });
+    logoutSuccess();
   },
   updateSignupDetails: async (data, updateSignupDetailsSuccess) => {
     set({ signupDetails: { ...data} });
@@ -130,7 +144,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
         loading: false,
       });
       completeSignupSuccess();
-    } catch {
+    } finally {
       set({ loading: false });
     }
   },
@@ -144,7 +158,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
       }
 
       forgotPasswordSuccess();
-    } catch {
+    } finally {
       set({ sendingMail: false });
     }
   },
@@ -157,7 +171,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
         return;
       }
       resetPasswordSuccess();
-    } catch {
+    } finally {
       set({ resettingPassword: false });
     }
   },

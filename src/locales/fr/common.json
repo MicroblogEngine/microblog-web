@@ -51,5 +51,10 @@
   "Invalid name": "Nom invalide",
   "Name must be more than 5 characters": "Nom doit contenir plus de 5 caractères",
   "Password confirmation is required": "Confirmation du mot de passe est requise",
-  "Profile not found": "Profil non trouvé"
+  "Profile not found": "Profil non trouvé",
+  "Forgot Password": "Mot de passe oublié?",
+  "Reset Password": "Réinitialiser le mot de passe",
+  "Password Reset": "Réinitialiser le mot de passe",
+  "Send Email": "Envoyer un email",
+  "Sending Email": "Envoi d'email..."
 } 

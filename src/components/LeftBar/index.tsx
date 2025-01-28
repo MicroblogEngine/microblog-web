@@ -20,6 +20,8 @@ import { t } from "i18next";
 import { Profile } from "@/models/profile";
 import { User } from "@/models/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAuthContext } from "@/security/auth";
+import { UserState } from "@/reducers/user";
 
 type LeftBarProps = {
   user?: User;
@@ -27,6 +29,7 @@ type LeftBarProps = {
 }
 
 const LeftBar = ({ user, profile }: LeftBarProps) => {
+  const logout = useAuthContext((state: UserState) => state.logout);
   const navigate = useNavigate();
 
   const onNewPostClick = () => {
@@ -57,11 +60,18 @@ const LeftBar = ({ user, profile }: LeftBarProps) => {
     console.log("Profile");
   }
 
+  const onLogoutClick = () => {
+    console.log("Logout");
+    logout(() => {
+      navigate({ to: "/" })
+    });
+  }
+
   return (
-    <div className="flex flex-col items-center w-2/6 p-2 pl-5 pr-5 prose border-r-2 md:flex border-r-slate-400 max-lg:w-20">
+    <div className="flex flex-col items-center w-2/6 p-2 pl-5 pr-5 prose border-r-2 md:flex border-r-slate-400 max-lg:w-24">
       <div className="flex flex-row items-center h-10">
         <span className="hidden text-4xl font-extrabold xl:flex">Microblog</span>
-        <img src={Logo} width={64} height={64} alt="Microblog" className="hidden max-xl:flex" />
+        <img src={Logo} alt="Microblog" className="hidden w-14 h-14 max-xl:flex" />
       </div>
       <Menu>
         <MenuItem title={t("Home")} icon={faHome} onClick={onHomeClick} />
@@ -73,15 +83,16 @@ const LeftBar = ({ user, profile }: LeftBarProps) => {
       </Menu>
 
       <RoundedButton 
-        className="bg-black rounded-full h-14 w-52 max-xl:w-14 max-xl:h-14" 
+        className="w-48 bg-black rounded-full h-14 max-xl:w-14 max-xl:h-14" 
         labelClassName="text-lg"
         title={t("New Post")} 
         icon={faPlus} 
         onClick={onNewPostClick}
       />
+      
       <div className="flex flex-col justify-end pt-10">
         {user && profile && (
-          <div className="flex flex-row items-center p-2 rounded-full cursor-pointer max-xl:p-0 h-14 hover:bg-slate-200 w-52 max-xl:w-14 max-xl:h-14">
+          <div className="flex flex-row items-center justify-center w-48 p-2 rounded-full cursor-pointer max-xl:p-0 h-14 hover:bg-slate-200 max-xl:w-14 max-xl:h-14" onClick={onLogoutClick}>
             <img src="https://placehold.co/100x100" alt="user" className="w-12 h-12 rounded-full max-xl:flex" />
             <div className="flex flex-col justify-start hidden w-full ml-2 xl:flex">
               <span className="text-lg font-bold text-black">{profile.name}</span>

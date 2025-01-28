@@ -8,12 +8,13 @@ import { useTranslation } from "react-i18next";
 import PageTitle from '@/components/PageTitle/PageTitle';
 import FormField from '@/components/FormField/FormField';
 import RoundedSubmitButton from '@/components/RoundedSubmitButton/RoundedSubmitButton';
-import { useUserStore } from "@/reducers/user";
+import PublicPage from '@/components/PublicPage';
+import { useAuthContext } from '@/security/auth';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const forgotPassword = useUserStore.use.forgotPassword();
-  const sendingMail = useUserStore.use.sendingMail();
+  const forgotPassword = useAuthContext((state) => state.forgotPassword);
+  const sendingMail = useAuthContext((state) => state.sendingMail);
   const { t } = useTranslation();
 
   const methods = useForm<ForgotPasswordForm>({
@@ -32,17 +33,17 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full'>
+    <PublicPage>
       <PageTitle text={t("Forgot Password")} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className='flex flex-col items-start'>
             <FormField label={t("Email")} name="email" type="email" />
           </div>     
-          <RoundedSubmitButton disabled={sendingMail} label={sendingMail ? t("Sending...") : t("Send")} />
+          <RoundedSubmitButton disabled={sendingMail} label={sendingMail ? t("Sending Email...") : t("Send Email")} />
         </form>
       </FormProvider>
-    </div>
+    </PublicPage>
   );
 };
 

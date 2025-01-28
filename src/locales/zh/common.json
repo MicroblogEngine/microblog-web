@@ -51,5 +51,10 @@
   "Invalid name": "无效的名字",
   "Name must be more than 5 characters": "名字必须超过5个字符",
   "Password confirmation is required": "密码确认是必需的",
-  "Profile not found": "个人资料未找到"
+  "Profile not found": "个人资料未找到",
+  "Forgot Password": "忘记密码？",
+  "Reset Password": "重置密码",
+  "Password Reset": "重置密码",
+  "Send Email": "发送电子邮件",
+  "Sending Email": "发送电子邮件中..."
 } 

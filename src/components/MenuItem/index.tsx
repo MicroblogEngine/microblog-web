@@ -9,9 +9,11 @@ interface MenuItemProps {
 
 const MenuItem = ({ title, icon, onClick }: MenuItemProps) => {
   return (
-    <div className="flex-row items-center p-2 cursor-pointer max-md:justify-center" onClick={onClick}>
-      <FontAwesomeIcon icon={icon} width={32} height={32} />
-      <span className="text-2xl font-bold max-xl:hidden">{title}</span>
+    <div className="flex flex-row items-center p-2 cursor-pointer max-md:justify-center" onClick={onClick}>
+      <div className="flex justify-center w-10">
+        <FontAwesomeIcon icon={icon} size='xl' />
+      </div> 
+      <span className="text-xl font-bold max-xl:hidden">{title}</span>
     </div>
   );
 };

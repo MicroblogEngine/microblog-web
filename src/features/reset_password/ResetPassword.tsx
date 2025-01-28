@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import {ResetPasswordForm} from '@ararog/microblog-types';
 import {ResetPasswordFormSchema} from '@ararog/microblog-validation'
 import { useTranslation } from "react-i18next";
@@ -8,19 +8,22 @@ import { useTranslation } from "react-i18next";
 import PageTitle from '@/components/PageTitle/PageTitle';
 import FormField from '@/components/FormField/FormField';
 import RoundedSubmitButton from '@/components/RoundedSubmitButton/RoundedSubmitButton';
-import { useUserStore } from "@/reducers/user";
+import { useAuthContext } from '@/security/auth';
+import PublicPage from '@/components/PublicPage';
 
 const ResetPassword = () => {
+  const search = useSearch({ from: '/reset-password' });
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const resetPassword = useUserStore.use.resetPassword();
-  const resettingPassword = useUserStore.use.resettingPassword();
+  const resetPassword = useAuthContext((state) => state.resetPassword);
+  const resettingPassword = useAuthContext((state) => state.resettingPassword);
 
   const methods = useForm<ResetPasswordForm>({
     resolver: zodResolver(ResetPasswordFormSchema),
     defaultValues: {
-      email: "",
+      token: search.token,
+      userId: search.userId,
       password: "",
       confirmPassword: "",
     },
@@ -35,11 +38,11 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center w-full h-full'>
+    <PublicPage>
       <PageTitle text={t("Password Reset")} />
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <div className='flex flex-col items-start'>
+          <div className='flex flex-col items-start gap-2'>
             <FormField 
               label={t("Email")} 
               name="email" 
@@ -59,10 +62,10 @@ const ResetPassword = () => {
               tabIndex={3}
             />
           </div>     
-          <RoundedSubmitButton disabled={resettingPassword} label={resettingPassword ? t("Resetting Password...") : t("Send")} />
+          <RoundedSubmitButton disabled={resettingPassword} label={resettingPassword ? t("Resetting Password...") : t("Reset Password")} />
         </form>
       </FormProvider>
-    </div>
+    </PublicPage>
   );
 };
 

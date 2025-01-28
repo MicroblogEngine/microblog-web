@@ -18,7 +18,11 @@ const FeedList = ({feed}:FeedListProps) => {
   }
 
   const _noRowsRenderer = () => {
-    return <p data-testid="message">{t("No posts to show")}</p>
+    return (
+      <div className="flex justify-center w-full m-10" data-testid="message">
+        <span className="text-lg font-bold">{t("No posts to show")}</span>
+      </div>
+    )
   }
 
   return (
@@ -26,7 +30,7 @@ const FeedList = ({feed}:FeedListProps) => {
       <AutoSizer>
         {({width, height}: {width: number, height: number}) => (
           <List
-            className="flex flex-grow-0 m-1 ml-2 mr-2"
+            className="flex flex-grow-0 w-full m-1 ml-2 mr-2"
             noRowsRenderer={_noRowsRenderer}
             rowCount={feed ? feed.length : 0}
             rowHeight={20}

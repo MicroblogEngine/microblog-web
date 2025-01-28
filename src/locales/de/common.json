@@ -51,5 +51,10 @@
   "Invalid name": "Ungültiger Name",
   "Name must be more than 5 characters": "Name muss mehr als 5 Zeichen haben",
   "Password confirmation is required": "Passwortbestätigung ist erforderlich",
-  "Profile not found": "Profil nicht gefunden"
+  "Profile not found": "Profil nicht gefunden",
+  "Forgot Password": "Passwort vergessen",
+  "Reset Password": "Passwort zurücksetzen",
+  "Password Reset": "Passwort zurücksetzen",
+  "Send Email": "Email senden",
+  "Sending Email": "Email senden..."
 } 

@@ -51,5 +51,10 @@
   "Invalid name": "無効な名前",
   "Name must be more than 5 characters": "名前は5文字以上でなければなりません",
   "Password confirmation is required": "パスワードの確認が必要です",
-  "Profile not found": "プロフィールが見つかりません"
+  "Profile not found": "プロフィールが見つかりません",
+  "Forgot Password": "パスワードを忘れた？",
+  "Reset Password": "パスワードをリセット",
+  "Password Reset": "パスワードをリセット",
+  "Send Email": "メールを送信",
+  "Sending Email": "メールを送信中..."
 } 

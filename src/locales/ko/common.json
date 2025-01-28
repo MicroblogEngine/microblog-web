@@ -51,5 +51,10 @@
   "Invalid name": "이름이 잘못되었습니다",
   "Name must be more than 5 characters": "이름은 5자 이상이어야 합니다",
   "Password confirmation is required": "비밀번호 확인이 필요합니다",
-  "Profile not found": "프로필을 찾을 수 없습니다"
+  "Profile not found": "프로필을 찾을 수 없습니다",
+  "Forgot Password": "비밀번호를 잊으셨나요?",
+  "Reset Password": "비밀번호 재설정",
+  "Password Reset": "비밀번호 재설정",
+  "Send Email": "이메일 보내기",
+  "Sending Email": "이메일 보내는 중..."
 } 

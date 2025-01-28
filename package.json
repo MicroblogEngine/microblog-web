@@ -15,8 +15,8 @@
   "dependencies": {
     "@ararog/microblog-server": "^0.0.2",
     "@ararog/microblog-state": "^0.0.1",
-    "@ararog/microblog-types": "^0.0.20",
-    "@ararog/microblog-validation": "^0.0.13",
+    "@ararog/microblog-types": "^0.0.21",
+    "@ararog/microblog-validation": "^0.0.14",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -33,6 +33,7 @@
     "i18next-resources-to-backend": "^1.2.1",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
+    "react-contexify": "^6.0.0",
     "react-dom": "^18.3.1",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.54.2",
