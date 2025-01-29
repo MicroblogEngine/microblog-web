@@ -10,8 +10,8 @@ const Composer = () => {
           <div className='w-full' >
             
           </div>
-            <button className="w-32 h-10 text-white bg-black rounded-full">{t("Post")}</button>
-          </div>
+          <button className="w-32 h-10 text-white bg-black rounded-full">{t("Post")}</button>
+        </div>
       </div>
     </div>
   );

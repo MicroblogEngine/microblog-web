@@ -58,5 +58,9 @@
   "Password Reset": "Password Reset",
   "Send Email": "Send Email",
   "Sending Email": "Sending Email...",
-  "Already have an account?": "Already have an account?"
+  "Already have an account?": "Already have an account?",
+  "Email sent": "Email sent",
+  "Email not found": "Email not found",
+  "Email already in use": "Email already in use",
+  "Remember your password?": "Remember your password?"
 } 

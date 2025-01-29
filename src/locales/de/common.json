@@ -57,5 +57,9 @@
   "Password Reset": "Passwort zurücksetzen",
   "Send Email": "Email senden",
   "Sending Email": "Email senden...",
-  "Already have an account?": "Hast du bereits ein Konto?"
+  "Already have an account?": "Hast du bereits ein Konto?",
+  "Email sent": "Email gesendet",
+  "Email not found": "Email nicht gefunden",
+  "Email already in use": "Email bereits in Verwendung",
+  "Remember your password?": "Passwort wiederholen?"
 } 

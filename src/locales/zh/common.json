@@ -57,5 +57,9 @@
   "Password Reset": "重置密码",
   "Send Email": "发送电子邮件",
   "Sending Email": "发送电子邮件中...",
-  "Already have an account?": "已经拥有账户？"
+  "Already have an account?": "已经拥有账户？",
+  "Email sent": "电子邮件已发送",
+  "Email not found": "电子邮件未找到",
+  "Email already in use": "电子邮件已使用",
+  "Remember your password?": "记住你的密码？"
 } 

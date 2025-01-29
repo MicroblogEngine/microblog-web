@@ -57,5 +57,9 @@
   "Password Reset": "パスワードをリセット",
   "Send Email": "メールを送信",
   "Sending Email": "メールを送信中...",
-  "Already have an account?": "アカウントを持っていますか？"
+  "Already have an account?": "アカウントを持っていますか？",
+  "Email sent": "メールが送信されました",
+  "Email not found": "メールが見つかりません",
+  "Email already in use": "メールがすでに使用されています",
+  "Remember your password?": "パスワードを覚えていますか？"
 } 
