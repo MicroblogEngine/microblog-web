@@ -10,6 +10,7 @@ import RoundedSubmitButton from "@/components/RoundedSubmitButton/RoundedSubmitB
 import PageTitle from "@/components/PageTitle/PageTitle";
 import FormField from "@/components/FormField/FormField";
 import { SystemErrors } from "@/components/SystemErrors/SystemErrors";
+import { useEffect } from "react";
 
 const Verify = () => {
   const navigate = useNavigate();
@@ -27,6 +28,10 @@ const Verify = () => {
       token: '',
     },
   });
+
+  useEffect(() => {
+    methods.setFocus('token');
+  }, [methods]);
 
   const onSubmit = (data: VerificationForm) => {
     verifyCode(data, onVerifySuccess);

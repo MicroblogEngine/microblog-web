@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod';
 
-import ResetPassword from '@/features/reset_password/ResetPassword'
+import ResetPassword from '@/features/password/reset/ResetPassword'
 
 const searchSchema = z.object({
   userId: z.string().uuid(),
@@ -9,7 +9,7 @@ const searchSchema = z.object({
 })
 
 
-export const Route = createFileRoute('/reset-password')({
+export const Route = createFileRoute('/password/reset')({
   component: ResetPassword,
   validateSearch: searchSchema,
 })

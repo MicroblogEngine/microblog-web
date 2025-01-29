@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useStore } from "zustand";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
@@ -31,6 +31,10 @@ const Login = () => {
       password: "",
     },
   });
+
+  useEffect(() => {
+    methods.setFocus('username');
+  }, [methods]);
 
   const onSubmit = (data: LoginForm) => {
     login(data.username, data.password, onLoginSuccess, onLoginFailed);
@@ -68,7 +72,7 @@ const Login = () => {
 
             <span className="mt-2 h-15">
               {t("Forgot your password?")} {" "}
-              <Link className="font-bold text-gray-800" to="/forgot-password">
+              <Link className="font-bold text-gray-800" to="/password/forgot">
                 {t("Reset")}
               </Link>{" "}
               {t("here")}.

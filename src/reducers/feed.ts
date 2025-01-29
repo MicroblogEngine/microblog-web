@@ -1,5 +1,5 @@
 import { create, StateCreator } from "zustand";
-import { cb } from "@ararog/microblog-types";
+import { Callback } from "@ararog/microblog-types";
 import { createSelectors } from "@ararog/microblog-state";
 
 import { api } from "@/helpers/api";
@@ -10,7 +10,7 @@ export interface FeedState {
   feed?: Post[];
   post?: Post;
   loading: boolean;
-  loadFeed: cb;
+  loadFeed: Callback;
   loadPost: (postId?: string) => void;
 }
 

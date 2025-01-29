@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate, useSearch } from '@tanstack/react-router';
@@ -12,7 +13,7 @@ import { useAuthContext } from '@/security/auth';
 import PublicPage from '@/components/PublicPage';
 
 const ResetPassword = () => {
-  const search = useSearch({ from: '/reset-password' });
+  const search = useSearch({ from: '/password/reset' });
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -28,6 +29,10 @@ const ResetPassword = () => {
       confirmPassword: "",
     },
   });
+
+  useEffect(() => {
+    methods.setFocus('password');
+  }, [methods]);
   
   const onSubmit = (data: ResetPasswordForm) => {
     resetPassword(data, onResetPasswordSuccess);
