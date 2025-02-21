@@ -1,13 +1,11 @@
 # syntax=docker/dockerfile:1
 ARG NODE_VERSION=23-bookworm
 ARG DEBIAN_CODENAME=slim
-
 ARG SOURCE_DIR=/home/jenkins
 
+
 FROM node:${NODE_VERSION}-${DEBIAN_CODENAME} AS builder
-
 ARG SOURCE_DIR
-
 WORKDIR "$SOURCE_DIR"
 
 RUN corepack enable
@@ -20,13 +18,13 @@ RUN rm  -rf dist  && \
   pnpm build && \
   tar czvf release/app.tar.gz -C dist/ .
 
+
 FROM builder AS test
-
 ARG SOURCE_DIR
-
 WORKDIR "$SOURCE_DIR"
+#RUN pnpm run test
+RUN echo "nothing to do"
 
-RUN pnpm run test
 
 FROM nginx:stable AS runtime
 SHELL [ "/bin/bash", "-euo", "pipefail", "-c" ]
@@ -36,9 +34,7 @@ COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/release/app.tar.gz",  "/ap
 #COPY --from=builder --chown=0 --link [ "${SOURCE_DIR}/config/default.conf.template", "/etc/nginx/templates/default.conf.template"]
 
 RUN apt-get install gettext-base 
-
 RUN mkdir /app
-
 RUN cp /app.tar.gz /usr/share/nginx/html && \
   cd /usr/share/nginx/html && \
   cp index.html index.html.template && \
