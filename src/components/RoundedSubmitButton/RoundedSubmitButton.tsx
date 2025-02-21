@@ -1,13 +1,30 @@
+import { cva } from "class-variance-authority";
+
 type RoundButtonProps = {
   disabled: boolean;
   label: string;
 };
 
-const RoundedSubmitButton = (props: RoundButtonProps) => {
+const button = cva(
+  "flex justify-center p-2 mt-2 text-lg font-normal text-white rounded-lg h-19 border-1 w-96",
+  {
+    variants: {
+      disabled: {
+        true: "bg-gray-300",
+        false: "bg-gray-600",
+      },
+    },
+    defaultVariants: {
+      disabled: false,
+    },
+  }
+);
+
+const RoundedSubmitButton = ({disabled, label}: RoundButtonProps) => {
   return (
     <input type="submit"
-      disabled={props.disabled}
-      className={`flex justify-center p-2 mt-2 text-lg font-normal text-white ${props.disabled ? 'bg-gray-300' : 'bg-gray-600'} rounded-lg h-19 border-1 w-96`} value={props.label}/>
+      disabled={disabled}
+      className={button({disabled})} value={label}/>
   );
 };
 
