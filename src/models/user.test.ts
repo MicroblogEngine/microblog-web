@@ -1,5 +1,6 @@
 import { it, expect } from 'vitest';
-import { User, LoginResponse } from './user';
+import { User } from './user';
+import { LoginResponse } from './auth';
 
 it('should create a valid user object', () => {
   const user: User = {
@@ -42,6 +43,14 @@ it('should create a valid login response object', () => {
       id: '123',
       username: 'testuser',
       email: 'test@example.com'
+    },
+    profile: {
+      id: '456',
+      bio: 'Test bio',
+      gender: 'male',
+      name: 'Test User',
+      avatar: 'test-avatar.jpg',
+      birthDate: new Date()
     },
     token: 'jwt-token-123'
   };
