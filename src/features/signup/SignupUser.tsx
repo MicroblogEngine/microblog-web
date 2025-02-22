@@ -68,7 +68,7 @@ const SignupUser = () => {
           </div>
           <RoundedSubmitButton disabled={loading} label={t("Signup")} />
         </form>
-      </FormProvider>      
+      </FormProvider>
     </div>
   );
   };

@@ -44,14 +44,14 @@ const ForgotPassword = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className='flex flex-col items-start'>
             <FormField label={t("Email")} name="email" type="email" />
-          </div>     
+          </div>
           <RoundedSubmitButton disabled={sendingMail} label={sendingMail ? t("Sending Email...") : t("Send Email")} />
           <div className="flex flex-row items-center justify-center mt-2">
             <span>
               {t('Remember your password?')}{' '}
               <Link className="font-bold text-gray-800" to="/login">{t('Login')}</Link>
             </span>
-          </div>          
+          </div>
         </form>
       </FormProvider>
     </PublicPage>

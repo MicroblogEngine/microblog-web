@@ -27,11 +27,13 @@ export interface UserState {
   loading: boolean;
   signupDetails?: SignupDetailsForm;
   verifyingCode: boolean;
+  resendingCode: boolean;
   sendingMail: boolean;
   resettingPassword: boolean;
   hasHydrated: boolean;
   setHasHydrated: (state: boolean) => void;
   verifyCode: (data: VerificationForm, verifySuccess: Callback) => void;
+  resendCode: (userId: string, resendSuccess: Callback) => void;
   login: (username: string, password: string, loginSuccess: Callback, loginFailed: MessageCallback) => void;
   logout: (logoutSuccess: Callback) => void;
   updateSignupDetails: (data: SignupDetailsForm, updateSignupDetailsSuccess: Callback) => void;
@@ -48,6 +50,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   loading: false,
   signupDetails: undefined,
   verifyingCode: false,
+  resendingCode: false,
   sendingMail: false,
   resettingPassword: false,
   hasHydrated: false,
@@ -73,6 +76,25 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
 
     } finally {
       set({ verifyingCode: false });
+    }
+  },
+  resendCode: async (userId, resendSuccess) => {
+    try {
+      set({ resendingCode: true, errors: undefined });
+      const response = await api.post<LoginResponse, UserApiError>("/auth/verify/resend", {
+        userId,
+      });
+
+      if (!response.ok) {
+        set({ resendingCode: false, errors: response?.data?.errors });
+        return;
+      }
+
+      if (response.ok) {
+        resendSuccess();
+      }
+    } finally {
+      set({ resendingCode: false });
     }
   },
   login: async (username, password, loginSuccess, loginFailed) => {
