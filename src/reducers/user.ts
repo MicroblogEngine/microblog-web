@@ -81,7 +81,7 @@ export const userStoreCreator: StateCreator<UserState> = (set, get) => ({
   resendCode: async (userId, resendSuccess) => {
     try {
       set({ resendingCode: true, errors: undefined });
-      const response = await api.post<LoginResponse, UserApiError>("/auth/verify/resend", {
+      const response = await api.post<LoginResponse, UserApiError>("/auth/email/verify/resend", {
         userId,
       });
 
