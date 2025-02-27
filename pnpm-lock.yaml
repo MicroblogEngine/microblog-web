@@ -18,8 +18,8 @@ importers:
         specifier: ^0.0.21
         version: 0.0.21
       '@ararog/microblog-validation':
-        specifier: ^0.0.14
-        version: 0.0.14(zod@3.24.1)
+        specifier: ^0.0.16
+        version: 0.0.16(zod@3.24.1)
       '@fortawesome/fontawesome-svg-core':
         specifier: ^6.7.2
         version: 6.7.2
@@ -211,8 +211,8 @@ packages:
   '@ararog/microblog-types@0.0.21':
     resolution: {integrity: sha512-T4zvHs4kSwovOhD/pR1y2zPUeTV8nAIxFIBPr4+Q1QJZ352WXqHz0W1pL3weZzE/pKVjY4D1ytx+c2y0fPCmCg==, tarball: https://npm.pkg.github.com/download/@ararog/microblog-types/0.0.21/53acde6fddadcbba28bca8800fe6cd113a14c633}
 
-  '@ararog/microblog-validation@0.0.14':
-    resolution: {integrity: sha512-Cw0+TiDbwvbput5GrFGmCPyfzWJAyHW+QFjngXvzdT8AG2bwwK4DozsON7w6Bit9aRA5wA+r/LeMT+D+37WcPg==, tarball: https://npm.pkg.github.com/download/@ararog/microblog-validation/0.0.14/9f28ddb6e14482f94acbfa912d9aa0ef9f95156f}
+  '@ararog/microblog-validation@0.0.16':
+    resolution: {integrity: sha512-g+c1fiKQcqvv4MYP2HLwk/19t4owiNx+dr1mGi8yylmNmfjZYiWPGCdAJ2TPHDlI9w9wI+UQOA0PyVSXbtWWNA==, tarball: https://npm.pkg.github.com/download/@ararog/microblog-validation/0.0.16/105d5a80a82639b45a432686486dba5fd4d445a8}
     peerDependencies:
       zod: ^3.24.1
 
@@ -2848,7 +2848,7 @@ snapshots:
 
   '@ararog/microblog-types@0.0.21': {}
 
-  '@ararog/microblog-validation@0.0.14(zod@3.24.1)':
+  '@ararog/microblog-validation@0.0.16(zod@3.24.1)':
     dependencies:
       zod: 3.24.1
 
