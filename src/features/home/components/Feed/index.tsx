@@ -9,7 +9,11 @@ const Feed = () => {
   const {feed, loading} = useFeedStore((state: FeedState) => state)
 
   if(loading) {
-    return <p data-testid="loading">Loading...</p>
+    return (
+      <div className="flex justify-center w-full m-10">
+        <p data-testid="loading" className="text-lg font-bold" >Loading...</p>
+      </div>
+    );
   }
   
   return (
