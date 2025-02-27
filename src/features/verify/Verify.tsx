@@ -63,21 +63,25 @@ const Verify = () => {
       {errors && <SystemErrors errors={errors["token"]} />}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {resendSuccess && 
-            <div className="flex flex-row items-center justify-center mt-2 mb-2">
-              <span className="text-sm font-bold">
-                {t("A new token has been sent to your mail address, please check your inbox.")}
+          <div className="flex flex-col items-center justify-center">
+            {resendSuccess && 
+              <div className="flex flex-col items-center justify-center mt-5 mb-5">
+                <span className="text-sm font-bold text-center">
+                  {t("A new token has been sent to your mail address,")}
+                  <br />
+                  {t(" please check your mail inbox.")}
+                </span>
+              </div>}
+            <div className='flex flex-col'>
+              <FormField label={t("Code")} name="token" type="text" />
+            </div>
+            <RoundedSubmitButton disabled={verifyingCode} label={verifyingCode ? t("Verifying...") : t("Verify")} />
+            <div className="flex flex-row items-center justify-center mt-2">
+              <span>
+                {t('Haven\'t received any token yet?')}{' '}
+                <span className="font-bold text-gray-800 cursor-pointer" onClick={onResendCode}>{resendingCode ? t('Resending...') : t('Resend')}</span>
               </span>
-            </div>}
-          <div className='flex flex-col items-start'>
-            <FormField label={t("Code")} name="token" type="text" />
-          </div>
-          <RoundedSubmitButton disabled={verifyingCode} label={verifyingCode ? t("Verifying...") : t("Verify")} />
-          <div className="flex flex-row items-center justify-center mt-2">
-            <span>
-              {t('Haven\'t received any token yet?')}{' '}
-              <span className="font-bold text-gray-800" onClick={onResendCode}>{resendingCode ? t('Resending...') : t('Resend')}</span>
-            </span>
+            </div>
           </div>
         </form>
       </FormProvider>
